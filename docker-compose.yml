@@ -1,0 +1,28 @@
+version: '2'
+
+# Define the services/containers to be run
+services:
+  eagletrt-docker-test: #name of your service
+    restart: always
+    build: ./microservices/test # specify the directory of the Dockerfile
+    ports:
+      - "3000:8080" #specify ports forwarding
+    links:
+      - database # link this service to the database service
+    volumes:
+      - .:/usr/src/app
+  nginx-proxy:
+    image: jwilder/nginx-proxy:alpine
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - static:/app/app/static/
+      - vhost:/etc/nginx/vhost.d
+      - html:/usr/share/nginx/html
+      - certs:/etc/nginx/certs
+      - /var/run/docker.sock:/tmp/docker.sock:ro
+    labels:
+      - "com.github.jrcs.letsencrypt_nginx_proxy_companion.nginx_proxy"
+    depends_on:
+      - web
