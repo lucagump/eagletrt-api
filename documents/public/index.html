@@ -1,0 +1,95 @@
+<html>
+  <head>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Tangerine">
+    <link href="https://fonts.googleapis.com/css?family=Waiting+for+the+Sunrise" rel="stylesheet" type="text/css"/>
+    <link rel="icon" type="image/x-icon" href="logo.png"> 
+    <title>eagle-api</title>
+    <style>
+      .title-design {
+        font-family: 'Oxygen', sans-serif;
+        font-size: 48px;
+        text-align: center;
+      }
+      .text-paragraph {
+        font-family: 'Oxygen', sans-serif;
+        font-size: 24px;
+        text-align: center;
+      }
+      a {
+        text-decoration: none;
+      }
+    </style>
+    <script>
+      var TxtType = function(el, toRotate, period) {
+        this.toRotate = toRotate;
+        this.el = el;
+        this.loopNum = 0;
+        this.period = parseInt(period, 10) || 2000;
+        this.txt = '';
+        this.tick();
+        this.isDeleting = false;
+      };
+
+      TxtType.prototype.tick = function() {
+          var i = this.loopNum % this.toRotate.length;
+          var fullTxt = this.toRotate[i];
+
+          if (this.isDeleting) {
+          this.txt = fullTxt.substring(0, this.txt.length - 1);
+          } else {
+          this.txt = fullTxt.substring(0, this.txt.length + 1);
+          }
+
+          this.el.innerHTML = '<span class="wrap">'+this.txt+'</span>';
+
+          var that = this;
+          var delta = 200 - Math.random() * 100;
+
+          if (this.isDeleting) { delta /= 2; }
+
+          if (!this.isDeleting && this.txt === fullTxt) {
+          delta = this.period;
+          this.isDeleting = true;
+          } else if (this.isDeleting && this.txt === '') {
+          this.isDeleting = false;
+          this.loopNum++;
+          delta = 500;
+          }
+
+          setTimeout(function() {
+          that.tick();
+          }, delta);
+      };
+
+      window.onload = function() {
+          var elements = document.getElementsByClassName('typewrite');
+          for (var i=0; i<elements.length; i++) {
+              var toRotate = elements[i].getAttribute('data-type');
+              var period = elements[i].getAttribute('data-period');
+              if (toRotate) {
+                new TxtType(elements[i], JSON.parse(toRotate), period);
+              }
+          }
+          // INJECT CSS
+          var css = document.createElement("style");
+          css.type = "text/css";
+          css.innerHTML = ".typewrite > .wrap { border-right: 0.08em solid #fff}";
+          document.body.appendChild(css);
+      };
+    </script>
+  </head>
+  <body>
+    <br><br>
+    <br><br>
+    <div class="title-design">
+      <h1>
+        <a href="" class="typewrite" data-period="2000" data-type='[ "hi, i am a microservice.", "i love internet." ]'>
+          <span class="wrap"></span>
+        </a>
+      </h1>
+    </div>
+    <div class="text-paragraph">
+      <p>API is running</p>
+    </div>
+  </body>
+</html>
