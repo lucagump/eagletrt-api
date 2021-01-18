@@ -1,7 +1,6 @@
 # eagletrt-api
-# eagle-bot-api
 
-A cloud-based application composed of different microservices developed with Node Js, Docker, NGINX, MongoDB.  The project is up and running (_hoping_) [here](https://theuselessweb.com/).
+A cloud-based application composed of different microservices developed with Node Js, Docker, NGINX, MongoDB.  The project is up and running (_i hope_) [here](https://theuselessweb.com/).
 
 
 ## Project Structure
@@ -10,8 +9,8 @@ A cloud-based application composed of different microservices developed with Nod
 
 ## Install
 ```javascript
-cd users
 git clone https://github.com/lucagump/eagletrt-api.git
+cd users
 npm install
 ```
 
