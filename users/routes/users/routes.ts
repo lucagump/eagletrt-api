@@ -1,5 +1,5 @@
 import express from 'express';
-import { userController } from '../../controllers';
+import { RouteController } from './user.routes.controller';
 
 export const userRouter = express.Router({
     strict: true
@@ -7,9 +7,9 @@ export const userRouter = express.Router({
 
 //middleware
 
-userRouter.get('/users', userController.read);
-userRouter.get('/users/:userID', userController.readOne);
+userRouter.get('/users', RouteController.get);
+userRouter.get('/users/:userID', RouteController.getByID);
 
-userRouter.post('/users', userController.create);
-userRouter.put('/users/:userID', userController.update);
-// userRouter.delete('/users/:userID', userController.delete);
+userRouter.post('/users', RouteController.post);
+// userRouter.put('/users/:userID', RouteController.update);
+// userRouter.delete('/users/:userID', RouteController.delete);
