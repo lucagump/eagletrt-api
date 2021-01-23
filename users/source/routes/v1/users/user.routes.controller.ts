@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { userController } from '../../controllers';
+import { userController } from '../../../controllers';
    
 export module RouteController {
     export function post(req: Request, res: Response): void {
