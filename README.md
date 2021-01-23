@@ -10,25 +10,18 @@ It's a cloud-based application composed of different microservices developed wit
 
 ![SchemaOverview](documents/draft-version.PNG)
 
-## Install
-```javascript
-git clone https://github.com/lucagump/eagletrt-api.git
-cd users
-npm install
-```
-
 ## Config
 
 Clone the repository, install the module and place the .env file with tokens and variables. 
 
-## Env Files
+### Env Files
 Place the `.env` file in each root of the microservices.<br>
 The test file should be called `.env.test` and it's used during local tests.<br>
 
 `.env`
 ```
 PORT=3030
-DB_NME=rememo
+DB_NME=dbname
 DB_HOSTNAME=<insert-your-connection-string>
 ```
 
