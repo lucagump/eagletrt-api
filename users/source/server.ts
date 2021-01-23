@@ -24,6 +24,15 @@ if(process.env.NODE_ENV !== 'test') {
 }                                  
 
 // Just an Index 
+/**
+ * @swagger
+ * /:
+ *  get:
+ *    description: Use to request nothing
+ *  responses:
+ *      '200':
+ *        description: A successful response
+ */
 app.get('/', function(req, res) {
   res.sendFile(path.join(__dirname + '/public/index.html'));
 });

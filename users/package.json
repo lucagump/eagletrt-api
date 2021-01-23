@@ -7,17 +7,18 @@
   "description": "Airtable Service",
   "main": "server.ts",
   "directories": {
-    "test": "dist/source/index.js"
+    "test": "tests"
   },
   "scripts": {
-    "serve": "npm run transpile && node dist/source/index.js",
-    "transpile": "tsc",
-    "start:run": "nodemon dist/server.js",
+    "transpile": "tsc -w",
+    "start:build": "tsc -w",
+    "start:run": "nodemon dist/source/server.js",
     "start": "concurrently npm:start:*",
     "commit": "git-cz",
     "commit:sign": "git-cz -S",
-    "test": "npm run transpile && npm run test:start",
-    "test:start": "mocha -r ts-node/register ./**/*.spec.ts"
+    "test": "concurrently npm:test:*",
+    "test:build": "npm run transpile && npm run test:start",
+    "test:start": "mocha dist/tests/index.test.js"
   },
   "repository": {
     "type": "git",

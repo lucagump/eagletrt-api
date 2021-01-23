@@ -5,7 +5,7 @@ const swaggerOptions = {
     swaggerDefinition: {
       info: {
         version: "1.0.0",
-        title: "Users API",
+        title: "Users APIs",
         description: "Users API Information",
         contact: {
           name: "Luca Martinelli"
@@ -13,7 +13,7 @@ const swaggerOptions = {
         servers: ["http://localhost:3333"]
       }
     },
-    apis: ['./routes/users/routes.ts', 'server.ts']
+    apis: ['./source/routes/v1/users/routes.ts', "./source/server.ts"]
   };
   
   const swaggerDocs = swaggerJsDoc(swaggerOptions);

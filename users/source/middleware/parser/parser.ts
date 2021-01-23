@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response } from 'express';
-import * as typesHelper from './types.helper';
+import * as typesHelper from './type.helper';
 
 function ResponseMDLW( res: Response){
     res.setHeader('Access-Control-Allow-Origin', '*');
