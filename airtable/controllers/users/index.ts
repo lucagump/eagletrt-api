@@ -1,6 +1,6 @@
 import Airtable from 'airtable';
 import config from '../../config'
-
+import Logger from '../../loaders/logger';
 
 export class UserController {
      

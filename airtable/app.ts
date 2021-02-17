@@ -1,20 +1,48 @@
 import express from 'express'
-import morgan from 'morgan'
-import getVersionRouter from './routes/router';
-import config from './config';
+import { Loader } from './loaders';
+import Logger from './loaders/logger';
 
-var app = express();
-app.use(morgan('dev'));
+function normalizePort(val: string | number | undefined, fallback = 3000): number {
+    if (typeof val === 'string') {
+        const port = parseInt(val, 10);
+        if (!isNaN(port) && port > 0)
+            return port;
+    } else if (typeof val === 'number' && val > 0) {
+        return val;
+    }
+    return fallback;
+}
 
-app.get('/', function (req, res) {
-   res.send('Hello World');
-})
+function start(app: express.Application, defPort: number | undefined = undefined) {
+    const port = normalizePort(defPort ? defPort : process.env.PORT);
 
-app.get('/doc', (req, res) => { res.status(301).redirect('https://google.com/'); });
-app.use('/api', getVersionRouter());
+    /**
+     * A little hack here
+     * Import/Export can only be used in 'top-level code'
+     * Well, at least in node 10 without babel and at the time of writing
+     * So we are using good old require.
+     **/
+    // await require('./loaders').default({ expressApp: app });
+    Loader.defaultLoader({ app });
 
-app.listen(config.port, () => {
-    console.log('\x1b[5m%s\x1b[0m', 'Server is up and running on ' + config.port + '\n');
-});
+    const server = app.listen(port, () => {
+        Logger.info(`⚡️[server]: Server is running at https://localhost:${port}⚡️`);
 
-export default app; // for testing
+      }).on('error', err => {
+        Logger.error(err);
+        process.exit(1);
+      });
+    
+    process.on('SIGINT', () => {
+        console.log('Killing the server');
+        console.log('Connection closed');
+        server.close();
+        process.exit();
+    });
+}
+
+// export default app; // for testing
+export default function(defPort: number | undefined = undefined) {
+    const app = express();
+    start(app, defPort);
+}

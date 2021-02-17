@@ -31,7 +31,7 @@ export module RouteController {
     
     export function update(req: Request, res: Response) {
         try {
-            var data = userController.updateUser(req);
+            var data = userController.updateUser(req.params.id,req.body);
             res.json({message: "User found!", data });
         } catch (error) {
             res.send(error);
