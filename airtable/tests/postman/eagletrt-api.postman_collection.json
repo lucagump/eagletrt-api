@@ -222,58 +222,6 @@
 				}
 			],
 			"description": "This service is used to retrieve and manage the information about members and the tasks. Each request needs the airtableToken and airtableBase."
-		},
-		{
-			"name": "getCollectionsFromKey",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "https://api.getpostman.com/collections?apikey=PMAK-602cf12bd62aac00350e00b9-5663ddf60827a960b77c20e66b7842f19b",
-					"protocol": "https",
-					"host": [
-						"api",
-						"getpostman",
-						"com"
-					],
-					"path": [
-						"collections"
-					],
-					"query": [
-						{
-							"key": "apikey",
-							"value": "PMAK-602cf12bd62aac00350e00b9-5663ddf60827a960b77c20e66b7842f19b"
-						}
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "getCollection",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "https://api.getpostman.com/collections?apikey=PMAK-602cf12bd62aac00350e00b9-5663ddf60827a960b77c20e66b7842f19b",
-					"protocol": "https",
-					"host": [
-						"api",
-						"getpostman",
-						"com"
-					],
-					"path": [
-						"collections"
-					],
-					"query": [
-						{
-							"key": "apikey",
-							"value": "PMAK-602cf12bd62aac00350e00b9-5663ddf60827a960b77c20e66b7842f19b"
-						}
-					]
-				}
-			},
-			"response": []
 		}
 	]
 }
