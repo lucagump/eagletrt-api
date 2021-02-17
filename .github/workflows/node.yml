@@ -8,12 +8,14 @@ on:
     branches: [ main ]
   pull_request:
     branches: [ main ]
-
+    
+defaults:
+  run:
+    working-directory: airtable
+    
 jobs:
   build:
-
     runs-on: ubuntu-latest
-
     strategy:
       matrix:
         node-version: [10.x, 12.x, 14.x, 15.x]
@@ -25,6 +27,4 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: ${{ matrix.node-version }}
-    - run: cd airtable
-    - run: ls
     - run: npm test
