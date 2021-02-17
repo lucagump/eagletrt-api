@@ -10,10 +10,10 @@ export default ({ app }: { app: express.Application }) => {
    * Health Check endpoints
    * @TODO Explain why they are here
    */
-  app.get('/status', (req, res) => {
+  app.get('/status', (req: express.Request, res: express.Response) => {
     res.status(200).end();
   });
-  app.head('/status', (req, res) => {
+  app.head('/status', (req: express.Request, res: express.Response) => {
     res.status(200).end();
   });
 
@@ -29,20 +29,20 @@ export default ({ app }: { app: express.Application }) => {
   // Middleware that transforms the raw string of req.body into json
   app.use(bodyParser.json());
   // Load API routes
-  app.get('/diocca', (req, res) => { res.status(301).redirect('https://google.com/'); });
+  app.get('/diocca', (req: express.Request, res: express.Response) => { res.status(301).redirect('https://google.com/'); });
   app.use('/api', getVersionRouter());
 
   app.use(morgan('dev'));
 
   /// catch 404 and forward to error handler
-  app.use((req, res, next) => {
-    const err = new Error('Not Found');
-    err['status'] = 404;
-    next(err);
-  });
+  // app.use((req: express.Request, res: express.Response, next: any) => {
+  //   const err = new Error('Not Found');
+  //   err['status'] = 404;
+  //   next(err);
+  // });
 
   /// error handlers
-  app.use((err, req, res, next) => {
+  app.use((err: any, req: express.Request, res: express.Response, next: any) => {
     /**
      * Handle 401 thrown by express-jwt library
      */
@@ -55,7 +55,7 @@ export default ({ app }: { app: express.Application }) => {
     return next(err);
   });
   
-  app.use((err, req, res, next) => {
+  app.use((err: any, req: express.Request, res: express.Response, next: any) => {
     res.status(err.status || 500);
     res.json({
       errors: {

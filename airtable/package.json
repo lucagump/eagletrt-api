@@ -2,7 +2,7 @@
   "name": "users",
   "version": "1.0.0",
   "description": "User Microservice - Adapter for Airtable Accounts",
-  "main": "app.ts",
+  "main": "dist/source/index.js",
   "directories": {
     "test": "tests"
   },
@@ -13,9 +13,8 @@
     "start": "concurrently npm:start:*",
     "commit": "git-cz",
     "commit:sign": "git-cz -S",
-    "test": "concurrently npm:test:*",
-    "test:build": "npm run transpile && npm run test:start",
-    "test:start": "node index.test.ts"
+    "test:start": "mocha ./dist/tests/index.spec.js",
+    "test": "tsc & npm run test:start"
   },
   "repository": {
     "type": "git",

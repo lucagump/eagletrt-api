@@ -9,8 +9,7 @@ export default async function() {
         
         before(async function() {
             this.timeout(7500);
-            console.log('Starting server in background ...');
-            childServer = spawn('node', ['dist/app.js', '--test', '--port', process.env.PORT ?? '4000']);
+            childServer = spawn('node', ['dist/index.js']);
             await new Promise((res) => setTimeout(res, 7000));
         });
 
@@ -40,7 +39,7 @@ export default async function() {
         it('Should run postman tests', async function() {
             this.timeout(20000);
             await runPostmanTests(
-                '../../../test/postman/eagletrt-api.postman_collection.json'
+                '../../../tests/postman/eagletrt-api.postman_collection.json'
             );
         });
     });
