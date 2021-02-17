@@ -1,47 +1,9 @@
 import express from 'express'
-import morgan from 'morgan';
-import bodyParser from'body-parser';
-import dotenv from 'dotenv';
-import path from 'path';
-
-import getVersionRouter from './routes/router';
-
-import { mdlware,swaggerUi, swaggerDocs } from './middleware';
-
-var result = dotenv.config();
-console.log(result.parsed);
-
-const expressport = process.env.DATABASE_SERVICE_PORT || 8080;
+import {  loaders  } from './loaders';
 
 const app = express();
 
-app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocs));
-app.use(bodyParser.json());   
-app.use(mdlware);
-
-if(process.env.NODE_ENV !== 'test') {
-  app.use(morgan('dev'));                                         
-}                                  
-
-// Just an Index 
-/**
- * @swagger
- * /:
- *  get:
- *    description: Use to request nothing
- *  responses:
- *      '200':
- *        description: A successful response
- */
-app.get('/', function(req, res) {
-  res.sendFile(path.join(__dirname + '/public/index.html'));
-});
-
-app.use(getVersionRouter);
-
-app.listen(expressport, () => {
-  console.log(`⚡️[server]: Server is running at https://localhost:${expressport}⚡️`);
-});
+await loaders.init({ expressApp: app });
 
 export default app; // for testing
 
