@@ -31,11 +31,5 @@ jobs:
     - name: Install node dependencies
       run: npm install
       
-    - name: Build Project
-      run: tsc
-
-    - name: Install Mocha
-      run: npm install mocha
-
-    - name: Run Tests 
-      run: mocha ./dist/tests/index.spec.js
+    - name: Build and Test Project
+      run: npm test
