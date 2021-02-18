@@ -4,7 +4,7 @@ import { ChildProcess, spawn } from 'child_process';
 
 export default async function() {
     
-    describe('Postaman Tests', function() {
+    describe('Postaman Tests', () => {
         let childServer: ChildProcess;
         
         before(async function() {
@@ -36,8 +36,8 @@ export default async function() {
             });
         }
 
-        it('Should run postman tests', async function() {
-            this.timeout(20000);
+        it('Should run postman tests', async () => {
+            // this.timeout(20000);
             await runPostmanTests(
                 '../../../tests/postman/eagletrt-api.postman_collection.json'
             );
