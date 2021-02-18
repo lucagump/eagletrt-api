@@ -28,8 +28,17 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
     
-    - name: Install node dependencies
+    - name: Install Node dependencies
       run: npm install
-      
+
+    - name: Create dir directory
+      run: mkdir ./dist
+    
+    - name: Check Mocha 
+      run: mocha --version
+
+    - name: Check Installation folder 
+      run: ls ./dir
+
     - name: Build and Test Project
       run: npm test
