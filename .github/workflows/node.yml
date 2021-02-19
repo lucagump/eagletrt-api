@@ -30,12 +30,12 @@ jobs:
     
     - name: Install Node dependencies
       run: npm install
-
-    - name: Create dir directory
-      run: mkdir ./dist
     
     - name: Check Mocha 
       run: npm install mocha -g
 
-    - name: Build and Test Project
-      run: npm test
+    - name: Build 
+      run: npm transpile
+
+    - name: Tests
+      run: mocha dist/tests/index.spec.js
