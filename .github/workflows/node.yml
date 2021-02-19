@@ -35,10 +35,7 @@ jobs:
       run: mkdir ./dist
     
     - name: Check Mocha 
-      run: mocha --version
-
-    - name: Check Installation folder 
-      run: ls ./dir
+      run: npm install mocha -g
 
     - name: Build and Test Project
       run: npm test
