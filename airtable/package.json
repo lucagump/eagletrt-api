@@ -2,7 +2,7 @@
   "name": "users",
   "version": "1.0.0",
   "description": "User Microservice - Adapter for Airtable Accounts",
-  "main": "dist/source/index.js",
+  "main": "dist/index.js",
   "directories": {
     "test": "tests"
   },

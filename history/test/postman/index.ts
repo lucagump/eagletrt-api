@@ -36,8 +36,8 @@ export default async function() {
             });
         }
 
-        it('Should run postman tests', async function(this: Mocha.Context) {
-            this.timeout(20000);
+        it('Should run postman tests', async () => {
+            // this.timeout(20000);
             await runPostmanTests(
                 '../../../tests/postman/eagletrt-api.postman_collection.json'
             );
