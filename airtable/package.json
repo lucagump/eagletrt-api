@@ -13,7 +13,7 @@
     "start": "concurrently npm:start:*",
     "commit": "git-cz",
     "commit:sign": "git-cz -S",
-    "test:start": "mocha ./dist/tests/tests.spec.js",
+    "test:start": "mocha dist/tests/tests.spec.js",
     "test": "npm run transpile & npm run test:start"
   },
   "repository": {

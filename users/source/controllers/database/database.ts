@@ -1,5 +1,6 @@
 import { connect, connection, Connection } from 'mongoose';
 import { User, UserModel } from '../../models';
+import config from '../../config'
 
 const dbuser = process.env.DB_USER || "eagletrt";
 const dbpassword = process.env.DB_PASSWORD || "eagletrt";
@@ -17,7 +18,7 @@ export class DB {
     private _db: Connection; 
     private _models: IModels;
 
-    private url = "mongodb+srv://" + dbuser + ":" + dbpassword + "@clustertest.yjrwo.mongodb.net/" + dbname + "?retryWrites=true&w=majority"
+    private url = "mongodb+srv://" + config.databaseUser + ":" + config.databasePassword + "@clustertest.yjrwo.mongodb.net/" + dbname + "?retryWrites=true&w=majority"
 
     private options = {
         useNewUrlParser: true,
@@ -45,7 +46,7 @@ export class DB {
     }
 
     private connected() {
-        // console.log('Mongoose has connected');
+        console.log('Mongoose has connected');
     }
 
     private error(error: any) {

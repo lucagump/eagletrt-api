@@ -7,7 +7,7 @@ import {swaggerUi, swaggerDocs} from './swagger/docs';
 // export default async ({ app }: { app: express.Application }) => {
 export module Loader {
     export async function defaultLoader({ app }: { app: express.Application }){
-        // const mongoConnection = await mongooseLoader();
+        const mongoConnection = await mongooseLoader();
         Logger.info('✌️ DB loaded and connected!');
         
         expressLoader({app});

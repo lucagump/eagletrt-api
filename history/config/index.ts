@@ -22,8 +22,17 @@ export default {
   /**
    * Mongodb env variables
    */
-  databasePort: process.env.AIRTABLE_KEY,
-  databaseUrl: process.env.AIRTABLE_BASE_ID,
+  databaseUrl: process.env.DB_HOST,
+  databaseAddress:process.env.DB_ADDRESS,
+  database:process.env.DB_HOST,
+  databasePassword:process.env.DB_PASSWORD,
+  databaseUser:process.env.DB_USER,
+  databaseName:process.env.DB_NAME,
+  databaseNameTest:process.env.DB_NAME_TEST,
+  databaseConfig:{
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+  },
   /**
    * Postman env variables
    */
