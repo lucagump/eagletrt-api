@@ -28,11 +28,12 @@ export default ({ app }: { app: express.Application }) => {
 
   // Middleware that transforms the raw string of req.body into json
   app.use(bodyParser.json());
-  // Load API routes
-  app.get('/diocca', (req: express.Request, res: express.Response) => { res.status(301).redirect('https://google.com/'); });
-  app.use('/api', getVersionRouter());
 
+  // Middleware to log req and res in console
   app.use(morgan('dev'));
+  
+  // Load API routes
+  app.use('/api', getVersionRouter());
 
   /// catch 404 and forward to error handler
   // app.use((req: express.Request, res: express.Response, next: any) => {

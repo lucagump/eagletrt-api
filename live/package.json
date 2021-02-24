@@ -1,0 +1,34 @@
+{
+  "name": "live",
+  "version": "1.0.0",
+  "description": "Live Telemetry Microservice - Adapter for MQTT data sent from the vehicle",
+  "main": "dist/app.js",
+  "scripts": {
+    "transpile": "tsc",
+    "start:build": "tsc -w",
+    "start:run": "nodemon dist/app.js",
+    "start": "concurrently npm:start:*",
+    "commit": "git-cz",
+    "commit:sign": "git-cz -S"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lucagump/eagletrt-api.git"
+  },
+  "author": "Luca Martinelli",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/lucagump/eagletrt-api/issues"
+  },
+  "homepage": "https://github.com/lucagump/eagletrt-api#readme",
+  "dependencies": {
+    "bson": "^4.2.2",
+    "dotenv": "^8.2.0",
+    "mongodb": "^3.6.4",
+    "mqtt": "^4.2.6",
+    "nodemon": "^2.0.7",
+    "ts-node": "^9.1.1",
+    "tsc": "^1.20150623.0",
+    "typescript": "^4.2.2"
+  }
+}
