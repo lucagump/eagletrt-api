@@ -17,7 +17,7 @@ export default {
   /**
    * Your favorite port and host URL
    */
-  port: process.env.PORT,
+  port: process.env.HISTORY_PORT,
   baseurl: process.env.BASE_URL,
   /**
    * Mongodb env variables

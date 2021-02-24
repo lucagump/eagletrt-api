@@ -1,95 +1,172 @@
 import { MongoClient } from 'mongodb'
-import { JsonObject } from 'swagger-ui-express';
 import config from '../../config'
-// import db from '../../loaders/database'
 
-// var MongoClient = mongodb.MongoClient;
-
-// import MongoClient = require('mongodb').MongoClient;
-// const ObjectId = require('mongodb').ObjectID;
-
-// const config = require('./config/config.json');
-
-
-var options = {
-    useNewUrlParser: true,
-    useUnifiedTopology: true
-};
+// const client = new MongoClient(config.databaseUrl as string, config.databaseConfig);
 
 export class DocumentController {
 
-    // Get the documents collection
-    public async getByTimestamp() {
-                  
-    };
-
-    // Get the documents collection
+    // Get the collection
     public async getCollections() {
-
-        // var connection = MongoClient.connect(url,options)
-        MongoClient.connect(config.databaseUrl as string, config.databaseConfig, (err, client) => {
-
-            if (err) throw err;
-        
-            const db = client.db(config.databaseNameTest as string);
-        
-            db.listCollections().toArray().then((docs) => {
-        
-                console.log('Available collections:');
-                var data: any = []
-                docs.forEach((doc, idx, array) => { data.push(doc.name); console.log(doc.name) });
-                console.log(data)
-                return data;
-            }).catch((err) => {
-        
-                console.log(err);
-            }).finally(() => {
-        
-                client.close();
-            });
-        }); 
-          
-    };
-    
-    public async findOne(collectionName: string,) {
 
         const client = await MongoClient.connect(config.databaseUrl as string, config.databaseConfig)
             .catch(err => { console.log(err); });
-    
+
         if (!client) {
-            return;
+            console.log('error')
+            return {"error":"Database connection error"}
         }
-    
+
         try {
-    
             const db = client.db(config.databaseNameTest as string);
-    
-            let collection = db.collection(collectionName);
-    
-            let query = { name: 'Volkswagen' }
-    
-            let res = await collection.findOne(query);
-    
-            console.log(res);
-    
-        } catch (err) {
-    
-            console.log(err);
+            var data = await db.listCollections().toArray();
+            var response: any  = []
+            data.forEach(element => {
+                response.push(element.name)
+            });
+            return response
+        } catch (error) {
+            return {"error":"Database query error"}
         } finally {
-    
-            client.close();
+            await client.close();
+        }            
+    };
+
+    // Get sessions
+    public async getSessions(collectionName: string) {
+
+        const client = await MongoClient.connect(config.databaseUrl as string, config.databaseConfig)
+            .catch(err => { console.log(err); });
+
+        if (!client) {
+            console.log('error')
+            return {"error":"Database connection error"}
         }
-    }
 
-    public async getByID() {
-        
+        try {
+            const db = client.db(config.databaseNameTest as string);
+            var collection = db.collection(collectionName);
+            
+            const query = {
+                'id': undefined,
+            };
+            
+            var data = await collection.find(query).toArray();
+            var response: any  = []
+            data.forEach(element => {
+                response.push(element.sessionName)
+            });
+
+            return response
+        } catch (error) {
+            return {"error":"Database query error"}
+        } finally {
+            await client.close();
+        }            
     };
 
-    public async getManyFromTimestamp() {
-        
+    // Get session documents
+    public async getSessionDocuments(collectionName: string,session: string) {
+
+        const client = await MongoClient.connect(config.databaseUrl as string, config.databaseConfig)
+            .catch(err => { console.log(err); });
+
+        if (!client) {
+            console.log('error')
+            return {"error":"Database connection error"}
+        }
+
+        try {
+            const db = client.db(config.databaseNameTest as string);
+            var collection = db.collection(collectionName);
+            
+            const query = {
+                'sessionName': session,
+                'id': { $ne : undefined}
+            };
+            var data = await collection.find(query).toArray();
+
+            return data
+        } catch (error) {
+            return {"error":"Database query error"}
+        } finally {
+            await client.close();
+        }            
+    };
+
+    // Get document with a certain timestamp 
+    public async getByTimestamp(collectionName: string, timestamp: Number) {
+        const client = await MongoClient.connect(config.databaseUrl as string, config.databaseConfig)
+        .catch(err => { console.log(err); });
+
+        if (!client) {
+            console.log('error')
+            return {"error":"Database connection error"}
+        }
+
+        try {
+            const db = client.db(config.databaseNameTest as string);
+            var collection = db.collection(collectionName);
+            var res = await collection.findOne({timestamp: timestamp});
+            
+            return res
+        } catch (error) {
+            console.log(error)
+            return {"error":"Database query error"}
+        } finally {
+            await client.close();
+        } 
     };
     
-    public async getManyByTimestamp() {
+    // Get Document by the ID
+    public async getByID(collectionName: string, id: Number) {
+        const client = await MongoClient.connect(config.databaseUrl as string, config.databaseConfig)
+        .catch(err => { console.log(err); });
 
-    }
+        if (!client) {
+            console.log('error')
+            return {"error":"Database connection error"}
+        }
+
+        try {
+            const db = client.db(config.databaseNameTest as string);
+            var collection = db.collection(collectionName);
+            var res = await collection.findOne({id: id});
+            
+            return res
+        } catch (error) {
+            console.log(error)
+            return {"error":"Database query error"}
+        } finally {
+            await client.close();
+        } 
+    };
+
+    // Get Documents by interval of values
+    public async getManyFromTimestamp(collectionName: string, start: Number, finish: Number) {
+        const client = await MongoClient.connect(config.databaseUrl as string, config.databaseConfig)
+        .catch(err => { console.log(err); });
+
+        if (!client) {
+            console.log('error')
+            return {"error":"Database connection error"}
+        }
+
+        try {
+            const db = client.db(config.databaseNameTest as string);
+            var collection = db.collection(collectionName);
+            const query = {
+                timestamp: {
+                    $gte: start,
+                    $lte: finish
+                }
+            };
+            var data = await collection.find(query).toArray();
+            return data
+        } catch (error) {
+            console.log(error)
+            return {"error":"Database query error"}
+        } finally {
+            await client.close();
+        } 
+    };
 }

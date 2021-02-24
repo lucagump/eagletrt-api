@@ -6,46 +6,93 @@ export module RouteController {
     export async function getCollections(req: Request, res: Response) {
         try {
             var data = await historyController.getCollections();
-            console.log(data)
             res.json({'collections': data});
         } catch (error) {
-            res.send(error);
+            res.json({"error": error});
         }
     };
+    
+    export async function getSessions(req: Request, res: Response) {
+        try {
+            if(req.params.collection != null){
+                var collection = req.params.collection
+                var data = await historyController.getSessions(collection);
+                res.json({'sessions': data});
+        } else {
+            res.status(400).json({'error': 'invalid req'})
+        }
+        } catch (error) {
+            res.json({"error": error});
+        }
+    };
+
+    export async function getSessionDocuments(req: Request, res: Response) {
+        try {
+            if(req.params.collection != null && req.params.session != null){
+                var collection = req.params.collection
+                var session = req.params.session
+
+                var data = await historyController.getSessionDocuments(collection,session);
+                res.json({'sessions': data});
+            } else {
+                res.status(400).json({'error': 'invalid req'})
+            }
+        } catch (error) {
+            res.json({"error": error});
+        }
+    };
+
     export async function getByTimestamp(req: Request, res: Response) {
         try {
-            await historyController.getByTimestamp();
-            // var data = await historyController.getByTimestamp();
-            res.json({'timestamp': 1});
+            if(req.params.collection != null && req.params.timestamp != null){
+                
+                var collection = req.params.collection
+                var timestamp = parseInt(req.params.timestamp)
+
+                var data = await historyController.getByTimestamp(collection,timestamp);
+                
+                res.json({'document': data});
+            } else {
+                res.status(400).json({'error': 'invalid req'})
+            }
         } catch (error) {
-            res.send(error);
+            res.json({"error": error});
         }
     };
     
     export async function getByID(req: Request, res: Response) {
         try {
-            // var data = await historyController.getByID(req.params.userID);
-            res.json({'id': 2});
+            if(req.params.collection != null && req.params.id != null){
+                
+                var collection = req.params.collection
+                var id = parseInt(req.params.id)
+
+                var data = await historyController.getByID(collection,id);
+                
+                res.json({'document': data});
+            } else {
+                res.status(400).json({'error': 'invalid req'})
+            }
         } catch (error) {
-            res.send(error);
+            res.json({"error": error});
         }
     }
-
+    
     export async function getManyFromTimestamp(req: Request, res: Response) {
         try {
-            // var data = await historyController.getManyFromTimestamp();
-            res.json({'start': req.params.start, 'end': req.params.finish});
+            if(req.params.collection != null && req.params.start != null && req.params.finish != null){
+                
+                var collection = req.params.collection
+                var start = parseInt(req.params.start)
+                var finish = parseInt(req.params.finish)
+                var data = await historyController.getManyFromTimestamp(collection,start,finish);
+                
+                res.json({'documents': data});
+            } else {
+                res.status(400).json({'error': 'invalid req'})
+            }
         } catch (error) {
-            res.send(error);
+            res.json({"error": error});
         }
     };
-    
-    export async function getManyByTimestamp(req: Request, res: Response) {
-        try {
-            // var data = await historyController.getManyByTimestamp(req.params.userID);
-            res.json({'timestamp': req.body.timestamp[0], 'timestamp1': req.body.timestamp[1]});
-        } catch (error) {
-            res.send(error);
-        }
-    }
 }

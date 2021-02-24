@@ -18,47 +18,58 @@ export default function (): express.Router {
 
     /**
      * @swagger
-     * /api/v1/data/:timestamp:
+     * /api/v1/sessions:
+     *  get:
+     *    description: This endpoint returns test sessions  
+     *  responses:
+     *      '200':
+     *        description: A successful response
+     */
+    router.get('/collections/:collection/sessions', RouteController.getSessions);
+
+    /**
+     * @swagger
+     * /api/v1/collections/:collection/session/:session:
+     *  get:
+     *    description: This endpoint returns test sessions  
+     *  responses:
+     *      '200':
+     *        description: A successful response
+     */
+    router.get('/collections/:collection/sessions/:session', RouteController.getSessionDocuments);
+
+    /**
+     * @swagger
+     * /api/v1/:collection/:timestamp:
      *  get:
      *    description: This endpoint returns the data with a certain timestamp
      *  responses:
      *      '200':
      *        description: A successful response
      */
-    router.get('/data/:timestamp', RouteController.getByTimestamp);
+    router.get('/data/:collection/:timestamp', RouteController.getByTimestamp);
 
     /**
      * @swagger
-     * /api/v1/data/collection/:start/:finsh:
+     * /api/v1/data/:collection/:start/:finsh:
      *  get:
      *    description: This endpoint returns the data from a certain timestamp to another
      *  responses:
      *      '200':
      *        description: A successful response
      */
-    router.get('/data/collection/:start/:finish', RouteController.getManyFromTimestamp);
+    router.get('/data/:collection/:start/:finish', RouteController.getManyFromTimestamp);
 
     /**
      * @swagger
-     * /api/v1/data/collection/multiples:
-     *  get:
-     *    description: This endpoint returns the data for multiple timestamps
-     *  responses:
-     *      '200':
-     *        description: A successful response
-     */
-    router.get('/data/collection/multiples', RouteController.getManyByTimestamp);
-
-    /**
-     * @swagger
-     * /api/v1/documents/:id:
+     * /api/v1/documents/:collection/:id:
      *  get:
      *    description: This endpoint returns the data with a certain id
      *  responses:
      *      '200':
      *        description: A successful response
      */
-    router.get('/documents/:id', RouteController.getByID);
+    router.get('/documents/:collection/:id', RouteController.getByID);
 
     return router;
 

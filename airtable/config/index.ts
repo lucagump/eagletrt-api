@@ -17,7 +17,7 @@ export default {
   /**
    * Your favorite port and host URL
    */
-  port: process.env.PORT,
+  port: process.env.AIRTABLE_PORT,
   baseurl: process.env.BASE_URL,
   /**
    * Airtable env variables
