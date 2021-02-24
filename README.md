@@ -3,7 +3,7 @@
 
 # eagletrt-api
 This project consists of an [express](https://expressjs.com/) rest API server written in Typescript.
-It's a cloud-based application composed of different microservices developed with Node Js, Docker, NGINX, MongoDB.  The project is up and running (_i hope_) [here](https://theuselessweb.com/).
+It's a cloud-based application. It's built with different microservices developed with Node Js, Docker, NGINX, MongoDB and MQTT. The project is up and running (_i hope_) [here](https://theuselessweb.com/).
 
 
 ## Project Structure
@@ -14,13 +14,25 @@ It's a cloud-based application composed of different microservices developed wit
 
 Clone the repository, install the module and place the .env file with tokens and variables. 
 
+## History
+
+_Todo_
+
+## Airtable
+
+_Todo_
+
+## Live
+
+_Todo_
+
 ### Env Files
 Place the `.env` file in each root of the microservices.<br>
 The test file should be called `.env.test` and it's used during local tests.<br>
 
 `.env`
 ```
-PORT=3030
+PORT=3333
 DB_NME=dbname
 DB_HOSTNAME=<insert-your-connection-string>
 ```
