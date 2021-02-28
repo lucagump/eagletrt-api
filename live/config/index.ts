@@ -1,4 +1,4 @@
-const dotenv = require('dotenv');
+import dotenv from 'dotenv';
 
 // config() will read your .env file, parse the contents, assign it to process.env.
 if (process.argv.includes('--test') || process.argv.includes('-t')) {
@@ -6,11 +6,6 @@ if (process.argv.includes('--test') || process.argv.includes('-t')) {
   console.log('Using test environment');
 } else {
   var envResult = dotenv.config();
-}
-if (envResult.error) {
-  // This error should crash whole process
-
-  throw new Error("⚠️  Couldn't find .env file  ⚠️");
 }
 
 export default {
