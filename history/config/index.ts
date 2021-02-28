@@ -7,9 +7,6 @@ if (process.argv.includes('--test') || process.argv.includes('-t')) {
 } else {
   var envResult = dotenv.config();
 }
-if (envResult.error) {
-  // This error should crash whole process
-
 
 export default {
   /**
