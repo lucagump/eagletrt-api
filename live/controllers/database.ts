@@ -2,25 +2,15 @@ import { MongoClient } from 'mongodb'
 import config from '../config'
 
 export module DatabaseController {
-    // Insert document in the defeault collection
-    export async function insertDocumentInCollection(obj: any) {
-
-        const client = await MongoClient.connect(config.databaseUrl as string, config.databaseConfig)
-            .catch(err => { console.log(err); });
-
-        if (!client) {
-            console.log('error')
-            return {"error":"Database connection error"}
-        }
-
+    export async function insert(obj: any){
+        const client = new MongoClient(config.databaseUrl as string, config.databaseConfig);
         try {
-            const db = client.db(config.databaseNameTest as string);
-            await db.insertOne(obj);
-
+            await client.connect();
+            await client.db(config.databaseNameTest as string).collection(config.databaseCollectionTest as string).insertOne(obj);
         } catch (error) {
-            return {"error":"Database insert error"}
+            console.log(error)
         } finally {
             await client.close();
-        }            
-    };
+        }
+    }
 }

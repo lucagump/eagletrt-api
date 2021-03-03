@@ -9,7 +9,7 @@ const client = mqtt.connect(mqttUri);
 
 client.on('connect', () => {
     console.log('Connecting to ' + config.topic + '...')
-    client.subscribe(config.topic, function (err) {
+    client.subscribe(config.topic as string, function (err) {
         if (err) {
             console.error('Error in connecting ', err);
         }
@@ -21,17 +21,19 @@ client.on('connect', () => {
 });
 
 client.on('offline', () => {
-    client.unsubscribe(config.topic);
+    client.unsubscribe(config.topic as string);
     console.log('Disconnected from /' + config.topic + '.');
 });
 
 client.on('message', function (_topic, message) {
     try {
-        // const json = deserialize(message);
+        const json = deserialize(message);
         // var json = message.toJSON()
         // var json = JSON.stringify(message)
-        var json = message.toString('utf8')
-        DatabaseController.insertDocumentInCollection(json);
+        console.log(json);
+        // var json = message.toString('utf8')
+        // DatabaseController.insertDocumentInCollection(json);
+        // DatabaseController.insert({data: 'json'});
     } catch (error) {
         console.log('json bad format', error, message)
     }

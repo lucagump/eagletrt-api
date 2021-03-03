@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "description": "[![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)\r [![MIT license](https://img.shields.io/badge/License-MIT-blue.svg)](https://github.com/lucagump/eagletrt-api/blob/main/LICENSE)",
   "main": "index.js",
-  "dependencies": {},
+  "dependencies": {
+    "concurrently": "^6.0.0"
+  },
   "devDependencies": {
     "cz-conventional-changelog": "^3.3.0"
   },

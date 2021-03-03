@@ -15,22 +15,10 @@ export default {
   mqttPort: process.env.MQTT_PORT,
   mqttHostname: process.env.MQTT_HOSTNAME,
   topic: process.env.MQTT_TOPIC,
+  msFrequency: parseInt(process.env.MQTT_FREQUENCY),
   /**
-   * Mongodb env variables
-   */
-  databaseUrl: process.env.DB_HOST,
-  databaseAddress:process.env.DB_ADDRESS,
-  database:process.env.DB_HOST,
-  databasePassword:process.env.DB_PASSWORD,
-  databaseUser:process.env.DB_USER,
-  databaseName:process.env.DB_NAME,
-  databaseNameTest:process.env.DB_NAME_TEST,
-  databaseCollectionTest:process.env.DB_COLLECTION_NAME_TEST,
-  databaseConfig:{
-    useNewUrlParser: true,
-    useUnifiedTopology: true
-  },
-
+   * Winston config 
+   */  
   logs: {
     level: process.env.LOG_LEVEL || 'silly',
   },

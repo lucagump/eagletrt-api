@@ -1,7 +1,7 @@
 {
-  "name": "live",
+  "name": "mqtt-publisher",
   "version": "1.0.0",
-  "description": "Live Telemetry Microservice - Adapter for MQTT data sent from the vehicle",
+  "description": "MQTT Test Telemetry Microservice - Mock Data Generator for MQTT",
   "main": "dist/app.js",
   "scripts": {
     "transpile": "tsc",
@@ -22,10 +22,7 @@
   },
   "homepage": "https://github.com/lucagump/eagletrt-api#readme",
   "dependencies": {
-    "bson": "^4.2.2",
-    "concurrently": "^6.0.0",
     "dotenv": "^8.2.0",
-    "mongodb": "^3.6.4",
     "mqtt": "^4.2.6",
     "nodemon": "^2.0.7",
     "ts-node": "^9.1.1",
@@ -33,7 +30,6 @@
     "typescript": "^4.2.2"
   },
   "devDependencies": {
-    "@types/mongodb": "^3.6.8",
     "@types/node": "^14.14.31"
   }
 }
