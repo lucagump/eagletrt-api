@@ -2,13 +2,17 @@ import dotenv from 'dotenv';
 
 // config() will read your .env file, parse the contents, assign it to process.env.
 if (process.argv.includes('--test') || process.argv.includes('-t')) {
-  var envResult = dotenv.config({ path: './.env.test' });
+  dotenv.config({ path: './.env.test' });
   console.log('Using test environment');
 } else {
-  var envResult = dotenv.config();
+  dotenv.config();
 }
 
 export default {
+  /**
+   * Your favorite port and host URL
+   */
+  port: process.env.LIVE_PORT,
   /**
    * Your favorite MQTTT port and broker host 
    */

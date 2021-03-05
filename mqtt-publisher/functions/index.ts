@@ -4,15 +4,20 @@ import config from '../config';
 var mqttUri = 'mqtt://' + config.mqttHostname + ':' + config.mqttPort;
 var client = mqtt.connect(mqttUri);
 
-function returnRandomFloat(min: number, max: number ) {
+function returnRandomFloat(min: number, max: number) {
     return (Math.random() * (max - min) + min).toFixed(2);
 }
+
+function getRndInteger(min: number, max: number) {
+    return Math.floor(Math.random() * (max - min) ) + min;
+  }
 
 export module helpers {
     export function startStream() {
 
         setInterval(function() {
 
+            var id = getRndInteger(0, 1100);
             var latitude = returnRandomFloat(-100, 100);
             var longitude = returnRandomFloat(-100, 100);
             var elevation = returnRandomFloat(-10, 10);
@@ -37,8 +42,9 @@ export module helpers {
             var temperature_a = returnRandomFloat(37, 47);
 
             /* Publish random data to the corresponding MQTT topic as a JSON string  */
-            client.publish(config.topic, JSON.stringify({
+            client.publish(config.topic as string, JSON.stringify({
 
+                'id': id,
                 'latitude': latitude,
                 'longitude': longitude,
                 'elevation': elevation,

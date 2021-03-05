@@ -1,5 +1,5 @@
 import { MongoClient } from 'mongodb'
-import config from '../config'
+import config from '../../config'
 
 export module DatabaseController {
     export async function insert(obj: any){
