@@ -10,6 +10,17 @@ It's a cloud-based application. It's built with different microservices develope
 
 ![SchemaOverview](documents/draft-version.PNG)
 
+## Todo 
+
++ [ ] Fix port from config
++ [ ] Authentication
++ [ ] New Tests
++ [ ] Joi Airtable
++ [ ] Check NGINX configuration 
++ [ ] Heroku CI
++ [X] Dockerfile
++ [X] docker-compsoe.yml
+
 ## Config
 
 Clone the repository, install the module and place the .env file with tokens and variables. 

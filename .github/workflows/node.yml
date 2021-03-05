@@ -67,3 +67,31 @@ jobs:
 
     - name: Tests
       run: mocha dist/tests/index.spec.js
+
+  live-tests:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [10.x]
+        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
+    defaults:
+      run:
+        working-directory: live
+    steps:
+    - uses: actions/checkout@v2
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v1
+      with:
+        node-version: ${{ matrix.node-version }}
+    
+    - name: Install Node dependencies
+      run: npm install
+    
+    - name: Check Mocha 
+      run: npm install mocha -g
+
+    - name: Build 
+      run: npm run transpile
+
+    - name: Tests
+      run: mocha dist/tests/index.spec.js

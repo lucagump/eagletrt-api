@@ -1,8 +1,8 @@
 import { MongoClient } from 'mongodb'
 import config from '../../config'
 
-export module DatabaseController {
-    export async function insert(obj: any){
+export class DatabaseController {
+    public async insert(obj: any){
         const client = new MongoClient(config.databaseUrl as string, config.databaseConfig);
         try {
             await client.connect();

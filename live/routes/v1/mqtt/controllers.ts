@@ -1,14 +1,14 @@
 import { Request, Response } from 'express';
-import config from '../../../config'
+import { mqttController } from '../../../controllers'
    
 export module RouteController {
     
     export async function getConfiguration(req: Request, res: Response) {
-        res.json({
-            "configuration": {
-                "port": config.mqttPort,
-                "hostname": config.mqttHostname
-            }
-        });
+        try {
+            var data = await mqttController.getConfiguration();
+            res.json({'configuration': data});
+        } catch (error) {
+            res.json({"error": error});
+        }
     };
 }

@@ -5,8 +5,8 @@ const swaggerOptions = {
     swaggerDefinition: {
       info: {
         version: "1.0.0",
-        title: "Database APIs",
-        description: "Database API Information",
+        title: "Live APIs",
+        description: "Live API Information",
         contact: {
           name: "Luca Martinelli"
         },

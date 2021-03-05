@@ -18,9 +18,9 @@ export module RouteController {
                 var collection = req.params.collection
                 var data = await historyController.getSessions(collection);
                 res.json({'sessions': data});
-        } else {
-            res.status(400).json({'error': 'invalid req'})
-        }
+            } else {
+                res.status(400).json({'error': 'invalid req'})
+            }
         } catch (error) {
             res.json({"error": error});
         }
