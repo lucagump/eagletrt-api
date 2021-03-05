@@ -6,7 +6,7 @@ This project consists of an [express](https://expressjs.com/) rest API server wr
 It's a cloud-based application. It's built with different microservices developed with Node Js, Docker, NGINX, MongoDB and MQTT. The project is up and running (_i hope_) [here](https://theuselessweb.com/).
 
 
-## Project Structure
+## Project Structure (Draft Version)
 
 ![SchemaOverview](documents/draft-version.PNG)
 
@@ -14,17 +14,25 @@ It's a cloud-based application. It's built with different microservices develope
 
 Clone the repository, install the module and place the .env file with tokens and variables. 
 
+## Authentication
+
+_To Do_
+
 ## History
 
-_Todo_
+The History microservice is used to serve the webapp with all the documents, data of the vehicle. This microservice consists of and adapter layer to get the information from a schema-less database (MongoDB on Atlas and inside the University of Trento)
 
 ## Airtable
 
-_Todo_
+The Airtable microservice is used to serve the webapp with all the information about the user and their personalized views based on their role. This microservice consists of and adapter layer to get the information from a Airtable.
 
 ## Live
 
-_Todo_
+The Live microservice is used to insert the documents/data sent from the vehicle. This microservice consists of proxy for the messages receive on the vehicle _topic_. The broker is _broker.mqttdashboard.com_.
+
+## MQTT Publisher
+
+The MQTT Publisher microservice is to intend as a _test_ service to emulate the condition of the car which is sending data to the online platform.
 
 ### Env Files
 Place the `.env` file in each root of the microservices.<br>
@@ -47,11 +55,22 @@ The complete generated document of the API is available [here](https://documente
 
 The [report ](https://github.com/lucagump/eagletrt-api/blob/main/documents/report.pdf) is in the /documents folder  
 
+## Docker Compose
+
+In the root folder run:
+
+`docker`
+```
+npm start
+```
+
+This command should build and run the microservices with the reverse proxy, each route is for now accessible. Further development will only expose the client routes in order to serve the web-app
+
 ## Scripts cheetsheet
 The application come with several npm scripts:
-* `npm run serve` - Transpile and run the application in one command
-* `npm run start` - Start the app with nodemon
-* `npm run transpile` - Transpile the typescript file to javascript
-* `npm run commit` - Commit with commitizen
-* `npm run commit:sign` - Signed commit with commitizen
+* `npm serve` - Transpile and run the application in one command
+* `npm start` - Start the app with nodemon
+* `npm transpile` - Transpile the typescript file to javascript
+* `npm commit` - Commit with commitizen
+* `npm commit:sign` - Signed commit with commitizen
 * `npm test` - Transpile the application and run all the tests
