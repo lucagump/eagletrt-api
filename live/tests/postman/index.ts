@@ -4,7 +4,7 @@ import { ChildProcess, spawn } from 'child_process';
 
 export default async function() {
     
-    describe('History / Postaman Tests', () => {
+    describe('Live / Postaman Tests', () => {
         let childServer: ChildProcess;
         
         before(async function() {
