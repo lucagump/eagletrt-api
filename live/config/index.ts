@@ -18,7 +18,7 @@ export default {
    */
   mqttPort: process.env.MQTT_PORT,
   mqttHostname: process.env.MQTT_HOSTNAME,
-  topic: process.env.MQTT_TOPIC,
+  topic: process.env.MQTT_TOPIC || "testAcoda",
   /**
    * Mongodb env variables
    */
