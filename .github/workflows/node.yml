@@ -35,7 +35,7 @@ jobs:
       run: npm install mocha -g
 
     - name: Build 
-      run: npm transpile
+      run: npm run transpile
 
     - name: Tests
       run: mocha dist/tests/index.spec.js
@@ -63,7 +63,7 @@ jobs:
       run: npm install mocha -g
 
     - name: Build 
-      run: npm transpile
+      run: npm run transpile
 
     - name: Tests
       run: mocha dist/tests/index.spec.js
@@ -91,7 +91,7 @@ jobs:
       run: npm install mocha -g
 
     - name: Build 
-      run: npm transpile
+      run: npm run transpile
 
     - name: Tests
       run: mocha dist/tests/index.spec.js
