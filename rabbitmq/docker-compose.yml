@@ -1,13 +1,6 @@
 version: "3.8"
 services:
-    nginx:
-        restart: always
+    sender:
         build:
-            context: ./nginx
-        ports:
-            - "6001:80"
-    nodeserveruno:
-        build:
-            context: ./serveruno
-        ports:
-            - "6000:6000"
+            context: ./sender
+

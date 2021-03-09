@@ -27,7 +27,7 @@ Clone the repository, install the module and place the .env file with tokens and
 
 ## Authentication
 
-_To Do_
+The Authentication microservice is an API gateway. It is straightforward and lightweight. It primarily function is to check the authentication fo the user and then via the router, directing requests to the appropriate service. But, because it’s a gateway to our distributed services. it doesn't require much effort to centralize user-level auth checks, so I prefered this choiche instead of using OAuth approach. 
 
 ## History
 
@@ -40,6 +40,11 @@ The Airtable microservice is used to serve the webapp with all the information a
 ## Live
 
 The Live microservice is used to insert the documents/data sent from the vehicle. This microservice consists of proxy for the messages receive on the vehicle _topic_. The broker is _broker.mqttdashboard.com_.
+
+## NGiNX
+
+NGINX is an open-source web server that also serves as a reverse proxy and HTTP load balancer.
+As reverse proxy it sits in front of our microservices and API Gateway. When a browser makes an HTTP request, the request first goes to the reverse proxy, which then sends the request to the appropriate microservice.
 
 ## MQTT Publisher
 
@@ -75,11 +80,10 @@ In the root folder run:
 npm start
 ```
 
-This command should build and run the microservices with the reverse proxy, each route is for now accessible. Further development will only expose the client routes in order to serve the web-app
+This command should build and run the microservices with the reverse proxy, each route is accessible right now. Further development will only expose the client routes in order to serve the web-app.
 
 ## Scripts cheetsheet
-The application come with several npm scripts:
-* `npm serve` - Transpile and run the application in one command
+Eache microservices have several npm scripts, the description is below:
 * `npm start` - Start the app with nodemon
 * `npm transpile` - Transpile the typescript file to javascript
 * `npm commit` - Commit with commitizen
