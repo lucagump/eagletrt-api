@@ -6,9 +6,10 @@ import getVersionRouter from '../../routes/router';
 
 
 export default ({ app }: { app: express.Application }) => {
-  // Load API routes
+
+  // Middleware to log req and res in console
   app.use(morgan('dev'));
-  
+
   /**
    * @swagger
    * /status:
@@ -18,10 +19,10 @@ export default ({ app }: { app: express.Application }) => {
    *      '200':
    *        description: A successful response
    */
-   app.get('/status', (req: express.Request, res: express.Response) => {
+  app.get('/status', (req: express.Request, res: express.Response) => {
     res.status(200).json({"status": "OK"});
-  });  
-  
+  });
+
   // Useful if you're behind a reverse proxy (Heroku, Bluemix, AWS ELB, Nginx, etc)
   // It shows the real origin IP in the heroku or Cloudwatch logs
   app.enable('trust proxy');
@@ -33,7 +34,8 @@ export default ({ app }: { app: express.Application }) => {
 
   // Middleware that transforms the raw string of req.body into json
   app.use(bodyParser.json());
-
+  
+  // Load API routes
   app.use('/api', getVersionRouter());
 
   /// catch 404 and forward to error handler

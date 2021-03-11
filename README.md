@@ -2,53 +2,69 @@
 [![MIT license](https://img.shields.io/badge/License-MIT-blue.svg)](https://github.com/lucagump/eagletrt-api/blob/main/LICENSE)
 
 # eagletrt-api
-This project consists of an [express](https://expressjs.com/) rest API server written in Typescript.
-It's a cloud-based application. It's built with different microservices developed with Node Js, Docker, NGINX, MongoDB and MQTT. The project is up and running (_i hope_) [here](https://theuselessweb.com/).
 
+## Technologies
+
+This project consists of an [express](https://expressjs.com/) rest API server written in Typescript.
+It's a cloud-based application. It's built with different microservices developed with Node Js, Docker, NGINX, MongoDB, MQTT and RabbitMQ. The project is up and running (_i hope_) [here](https://theuselessweb.com/).
+
+## Goal
+
+This application is the result of the continuos research of the telemtry group from 2018 untill 2021. The result is a maintainable application to serve the telemtry web-app used byt the member of the team.
+The main focus is to serve the webapp by giving the data to render the charts of the vehicle during the tests. Each user should have the possiblity to see a customizable page with charts and configuration of the vehicle. Further user stories could be implemented starting from this _zero_ version of the software.
 
 ## Project Structure (Draft Version)
 
 ![SchemaOverview](documents/draft-version.PNG)
 
-## Todo 
+### Todo 
 
 + [ ] Fix port from config
 + [ ] Authentication
 + [ ] New Tests
 + [ ] Joi Airtable
++ [ ] Swagger to NGINX Configuration [Script] (https://gist.github.com/nginx-gists/37ce65292a06219ff8d35d293c05e0b5#file-oas2nginx-sh)
 + [ ] Check NGINX configuration 
 + [ ] Heroku CI
 + [X] Dockerfile
 + [X] docker-compsoe.yml
 
-## Config
 
-Clone the repository, install the module and place the .env file with tokens and variables. 
+## MicroServices
 
-## Authentication
+### NGiNX
 
-The Authentication microservice is an API gateway. It is straightforward and lightweight. It primarily function is to check the authentication fo the user and then via the router, directing requests to the appropriate service. But, because it’s a gateway to our distributed services. it doesn't require much effort to centralize user-level auth checks, so I prefered this choiche instead of using OAuth approach. 
+NGINX is an open-source web server that also serves as a reverse proxy and HTTP load balancer.
+As reverse proxy it sits in front of our microservices and API Gateway. When a browser makes an HTTP request, the request first goes to the reverse proxy, by checking the API Key for the user, which then sends the request to the appropriate microservice. It is straightforward and lightweight, but in future the authentication process will be handled differently.
 
-## History
+### API Gateway
 
-The History microservice is used to serve the webapp with all the documents, data of the vehicle. This microservice consists of and adapter layer to get the information from a schema-less database (MongoDB on Atlas and inside the University of Trento)
+The API Gateway is responsible for request routing, composition, and protocol translation. All requests from clients first go through the API Gateway. It then routes requests to the
+appropriate microservice. The API Gateway will often handle a request by invoking multiple microservices and aggregating the results. 
 
-## Airtable
+### History
 
-The Airtable microservice is used to serve the webapp with all the information about the user and their personalized views based on their role. This microservice consists of and adapter layer to get the information from a Airtable.
+The History microservice is used to serve the web-app with all the documents, data of the vehicle. This microservice consists of and adapter layer to get the information from a schema-less database (MongoDB on Atlas and inside the University of Trento)
 
-## Live
+### Users
+
+The Airtable microservice is used to serve the web-app with all the information about the user and their personalized views based on their role. This microservice consists of and adapter layer to get the information from a Airtable.
+
+### Views
+
+The Views microservice is used to serve the web-app with all the information about the personalized views based on the user role. This microservice consists of and adapter layer to get the information from a Airtable.
+
+### Live
 
 The Live microservice is used to insert the documents/data sent from the vehicle. This microservice consists of proxy for the messages receive on the vehicle _topic_. The broker is _broker.mqttdashboard.com_.
 
-## NGiNX
+### MQTT Publisher
 
-NGINX is an open-source web server that also serves as a reverse proxy and HTTP load balancer.
-As reverse proxy it sits in front of our microservices and API Gateway. When a browser makes an HTTP request, the request first goes to the reverse proxy, which then sends the request to the appropriate microservice.
+The MQTT Publisher microservice is to intend as a _test_ service to emulate the condition of the car which is sending data to the online application.
 
-## MQTT Publisher
+## Setup and Configuration
 
-The MQTT Publisher microservice is to intend as a _test_ service to emulate the condition of the car which is sending data to the online platform.
+Clone the repository, install the module and place the .env file with tokens and variables.
 
 ### Env Files
 Place the `.env` file in each root of the microservices.<br>
@@ -61,17 +77,7 @@ DB_NME=dbname
 DB_HOSTNAME=<insert-your-connection-string>
 ```
 
-## API Documentation 
-
-The complete generated document of the API is available [here](https://documenter.getpostman.com/view/3504740/TVCjx5xT#33c906b0-350f-4e19-a0e6-09d6a9aab648). It's possible to check the documentation of each microservices on the route _/api-docs_ 
-
-## Report
-
-![SchemaExample](documents/to-do.png)
-
-The [report ](https://github.com/lucagump/eagletrt-api/blob/main/documents/report.pdf) is in the /documents folder  
-
-## Docker Compose
+### Docker Compose
 
 In the root folder run:
 
@@ -82,10 +88,23 @@ npm start
 
 This command should build and run the microservices with the reverse proxy, each route is accessible right now. Further development will only expose the client routes in order to serve the web-app.
 
-## Scripts cheetsheet
+### Scripts cheetsheet
 Eache microservices have several npm scripts, the description is below:
 * `npm start` - Start the app with nodemon
 * `npm transpile` - Transpile the typescript file to javascript
 * `npm commit` - Commit with commitizen
 * `npm commit:sign` - Signed commit with commitizen
 * `npm test` - Transpile the application and run all the tests
+
+
+## Documentation and API Documentation  
+
+The complete generated document of the API is available [here](https://documenter.getpostman.com/view/3504740/TVCjx5xT#33c906b0-350f-4e19-a0e6-09d6a9aab648). It's possible to check the documentation of each microservices on the route _/api-docs_ 
+
+## Report
+
+![SchemaExample](documents/to-do.png)
+
+The [report ](https://github.com/lucagump/eagletrt-api/blob/main/documents/report.pdf) is in the /documents folder  
+
+

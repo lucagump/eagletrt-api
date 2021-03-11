@@ -1,29 +1,34 @@
 version: '3.8'
 services:
-  # authentication:
-  #   build: ./authentication
-  #   ports:
-  #   - "5000:3332"  
-
-  airtable:
-    build: ./airtable
+  authentication:
+    build: ./authentication
     ports:
-    - "5001:3333"  
+    - "5000:3000"  
+
+  users:
+    build: ./users
+    ports:
+    - "5001:3001"  
+    
+  views:
+    build: ./views
+    ports:
+    - "5002:3002"  
 
   history:
     build: ./history
     ports:
-    - "5002:3334"
+    - "5003:3003"
 
   live:
     build: ./live
     ports:
-    - "5003:3335"
+    - "5004:3004"
 
   mqtt-pubblisher:
     build: ./mqtt-publisher
     ports:
-    - "5004:8080"
+    - "5005:3005"
 
   nginx:
     restart: always

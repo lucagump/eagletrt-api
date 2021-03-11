@@ -5,15 +5,15 @@ const swaggerOptions = {
     swaggerDefinition: {
       info: {
         version: "1.0.0",
-        title: "Database APIs",
-        description: "Database API Information",
+        title: "Views APIs",
+        description: "Views API Information",
         contact: {
           name: "Luca Martinelli"
         },
-        servers: ["http://localhost:3004"]
+        servers: ["http://localhost:3002"]
       }
     },
-    apis: ['./routes/v1/database/routes.ts','./loaders/express/index.ts']
+    apis: ['./routes/v1/views/routes.ts','./loaders/express/index.ts']
   };
   
   const swaggerDocs = swaggerJsDoc(swaggerOptions);
