@@ -73,7 +73,6 @@ export class UserController {
                     return
                 }
             });
-            console.log(data)
             return data
         } catch (error) {
             return error
