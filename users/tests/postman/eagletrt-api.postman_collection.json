@@ -214,6 +214,75 @@
 			"response": []
 		},
 		{
+			"name": "users/username/:username",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"let jsonData = pm.response.json();\r",
+							"\r",
+							"pm.test(\"GET Request\", function (){\r",
+							"    pm.response.to.have.status(200);\r",
+							"})\r",
+							"\r",
+							"pm.test(\"JSON Data Response\", function (){\r",
+							"    pm.expect(jsonData)\r",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"type": "text",
+						"value": "application/vnd.github.v3+json",
+						"disabled": true
+					},
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "http://localhost:3001/api/v1/users/username/:username ",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"api",
+						"v1",
+						"users",
+						"username",
+						":username "
+					],
+					"variable": [
+						{
+							"key": "username ",
+							"value": "lucagump"
+						}
+					]
+				},
+				"description": "This API allows to retrieve member by the github username"
+			},
+			"response": []
+		},
+		{
 			"name": "users/:userID",
 			"event": [
 				{

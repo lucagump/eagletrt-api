@@ -1,10 +1,52 @@
 {
 	"info": {
-		"_postman_id": "21c2b1c4-4e4d-4187-ade4-38e440a14378",
-		"name": "eagletrt-api/airtable",
+		"_postman_id": "32fc6d92-af9a-409e-9641-5c056ad107db",
+		"name": "eagletrt-api/views",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
+		{
+			"name": "status",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"let jsonData = pm.response.json();\r",
+							"\r",
+							"pm.test(\"GET Request\", function (){\r",
+							"    pm.response.to.have.status(200);\r",
+							"})\r",
+							"\r",
+							"pm.test(\"JSON Data Response\", function (){\r",
+							"    pm.expect(jsonData)\r",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3002/status",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3002",
+					"path": [
+						"status"
+					]
+				}
+			},
+			"response": []
+		},
 		{
 			"name": "docs api",
 			"event": [
@@ -25,12 +67,12 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:3333/api-docs/",
+					"raw": "http://localhost:3002/api-docs/",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "3333",
+					"port": "3002",
 					"path": [
 						"api-docs",
 						""
@@ -40,7 +82,7 @@
 			"response": []
 		},
 		{
-			"name": "users",
+			"name": "views",
 			"event": [
 				{
 					"listen": "test",
@@ -54,8 +96,10 @@
 							"\r",
 							"pm.test(\"GET Request\", function (){\r",
 							"    pm.response.to.have.status(200);\r",
-							"    // pm.expect(jsonData.args.isGood).to.eql('true');\r",
-							"    // pm.expect(jsonData.args.isBad).to.eql('false');\r",
+							"})\r",
+							"\r",
+							"pm.test(\"JSON Data Response\", function (){\r",
+							"    pm.expect(jsonData)\r",
 							"})"
 						],
 						"type": "text/javascript"
@@ -94,16 +138,16 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:3333/api/v1/users",
+					"raw": "http://localhost:3002/api/v1/views",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "3333",
+					"port": "3002",
 					"path": [
 						"api",
 						"v1",
-						"users"
+						"views"
 					]
 				},
 				"description": "This API allows to retrieve the list of the members"
@@ -111,7 +155,7 @@
 			"response": []
 		},
 		{
-			"name": "users/:username",
+			"name": "views/users/:username",
 			"event": [
 				{
 					"listen": "test",
@@ -125,8 +169,10 @@
 							"\r",
 							"pm.test(\"GET Request\", function (){\r",
 							"    pm.response.to.have.status(200);\r",
-							"    // pm.expect(jsonData.args.isGood).to.eql('true');\r",
-							"    // pm.expect(jsonData.args.isBad).to.eql('false');\r",
+							"})\r",
+							"\r",
+							"pm.test(\"JSON Data Response\", function (){\r",
+							"    pm.expect(jsonData)\r",
 							"})"
 						],
 						"type": "text/javascript"
@@ -153,17 +199,24 @@
 					}
 				],
 				"url": {
-					"raw": "http://localhost:3333/api/v1/users/recLx5MhABv7ZA1Ez",
+					"raw": "http://localhost:3002/api/v1/views/users/:username",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "3333",
+					"port": "3002",
 					"path": [
 						"api",
 						"v1",
+						"views",
 						"users",
-						"recLx5MhABv7ZA1Ez"
+						":username"
+					],
+					"variable": [
+						{
+							"key": "username",
+							"value": "lucagump"
+						}
 					]
 				},
 				"description": "This API allows to retrieve member by the github username"

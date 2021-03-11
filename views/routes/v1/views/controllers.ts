@@ -7,25 +7,23 @@ export module RouteController {
             var data = await viewController.getViews();
             res.json(data);
         } catch (error) {
-            res.send(error);
+            res.status(500).json(error);
         }
     };
     
-    export async function getView(req: Request, res: Response) {
-        try {
-            var data = await viewController.getView(req.params.view);
-            res.json(data);
-        } catch (error) {
-            res.send(error);
-        }
-    }
-
     export async function getUsersViews(req: Request, res: Response) {
         try {
-            var data = await viewController.getUsersViews(req.params.userID);
-            res.json(data);
+            if(req.params.username !== null) {
+                var data = await viewController.getUsersViews(req.params.username);
+                if (data.data === []){
+                    return res.status(404).json(data)
+                }
+                res.status(200).json(data);
+            } else{
+                res.status(400).json({error: "Bad Parameters"})
+            }
         } catch (error) {
-            res.send(error);
+            res.status(500).json(error);
         }
     }
 }

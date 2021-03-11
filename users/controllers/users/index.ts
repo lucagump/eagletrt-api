@@ -38,6 +38,7 @@ export class UserController {
             return {}
         }
     }
+
     public async getUser(id: any) {
         var base = this.connectAirtable();
         if(base !== undefined){
@@ -59,6 +60,23 @@ export class UserController {
             }
         } else {
             return {error: 'Error connecting to Airtable'}
+        }
+    }
+
+    public async getUserByUsername(username: any) {
+        try {
+            const records = await this.getUsers();
+            var data = {}
+            records.forEach((element: { username: any; }) => {
+                if(element.username == username) {
+                    data = element;
+                    return
+                }
+            });
+            console.log(data)
+            return data
+        } catch (error) {
+            return error
         }
     }
     

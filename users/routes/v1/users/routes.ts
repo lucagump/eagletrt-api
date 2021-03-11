@@ -29,6 +29,17 @@ export default function (): express.Router {
 
     /**
      * @swagger
+     * /api/v1/users/username/:username:
+     *  get:
+     *    description: Use to request a user by the username
+     *  responses:
+     *      '200':
+     *        description: A successful response
+     */
+         router.get('/users/username/:username', RouteController.getUserByUsername);
+
+    /**
+     * @swagger
      * /api/v1/users/:userID:
      *  post:
      *    description: Use to update user jwt

@@ -19,12 +19,10 @@ export class ViewController {
                 const records = await base('Views').select().firstPage();
                 
                 records.forEach((element: { id: any; fields: { Charts: any; }; }) => {
-                    data.push({
-                        charts: element.fields.Charts,
-                    }) 
+                    data.push(element.fields.Charts) 
                 });
 
-                return data
+                return {data}
             } catch (err) {
                 console.log(err)
                 return err.message    
@@ -34,39 +32,27 @@ export class ViewController {
         }
     }
 
-    public async getView(id: any) {
-        var base: any = this.connectAirtable();
-        var data: Array<any> = [];
-        if(base !== undefined){
-            try {
-                const records = await base('Views').select().firstPage();
-                return {data: 'booo'}                
-            } catch (err) {
-                console.log(err)
-                return err.message    
-            }
-        } else {
-            return {}
-        }
-    }
-
-    public async getUsersViews(id: any) {
+    public async getUsersViews(username: any) {
         var base = this.connectAirtable();
+        var data: Array<any> = [];
+        var response = {}
         if(base !== undefined){
             try {
-                const record = await base('Users').find(id)
-                if (record.id !== null) {
-                    const views = await base('Views').find(record.id)
+                
+                const records = await base('Views').select().firstPage();
+                
+                records.forEach((element: { id: any; fields: { Charts: any; Username: any; }; }) => {
+                    if(element.fields.Username.includes(username)){
+                        data.push(element.fields.Charts) 
+                    }
+                });
+                
+                response = {
+                    username: username,
+                    data
                 }
-                var data = {
-                    id: record.id,
-                    name: record.fields.Name,
-                    surname: record.fields.Surname,
-                    username: record.fields.Username,
-                    admin: record.fields.Admin,
-                }
-    
-                return data
+                
+                return response
             } catch (err) {
                 console.log(err)
                 return err.message
