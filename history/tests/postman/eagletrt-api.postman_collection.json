@@ -6,17 +6,64 @@
 	},
 	"item": [
 		{
-			"name": "docs api",
+			"name": "status",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
 			"request": {
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:3334/api-docs/",
+					"raw": "http://localhost:3003/status",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "3334",
+					"port": "3003",
+					"path": [
+						"status"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "docs api",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3003/api-docs/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3003",
 					"path": [
 						"api-docs",
 						""
@@ -54,12 +101,12 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:3334/api/v1/collections",
+					"raw": "http://localhost:3003/api/v1/collections",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "3334",
+					"port": "3003",
 					"path": [
 						"api",
 						"v1",
@@ -110,18 +157,24 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:3334/api/v1/collections/schio/sessions",
+					"raw": "http://localhost:3003/api/v1/collections/:collection/sessions",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "3334",
+					"port": "3003",
 					"path": [
 						"api",
 						"v1",
 						"collections",
-						"schio",
+						":collection",
 						"sessions"
+					],
+					"variable": [
+						{
+							"key": "collection",
+							"value": "schio"
+						}
 					]
 				}
 			},
@@ -168,12 +221,12 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:3334/api/v1/collections/:collection/sessions/:session",
+					"raw": "http://localhost:3003/api/v1/collections/:collection/sessions/:session",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "3334",
+					"port": "3003",
 					"path": [
 						"api",
 						"v1",
@@ -190,6 +243,76 @@
 						{
 							"key": "session",
 							"value": "20201215_174858_Mirco_Acceleration_v0.0.0"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "session min max timestamp",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"let jsonData = pm.response.json();\r",
+							"\r",
+							"pm.test(\"GET Request\", function (){\r",
+							"    pm.response.to.have.status(200);\r",
+							"})\r",
+							"\r",
+							"pm.test(\"JSON Data Response\", function (){\r",
+							"    pm.expect(jsonData)\r",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"timestamp\":[1582483097140]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3003/api/v1/collections/:collection/sessions/:session/minmax",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3003",
+					"path": [
+						"api",
+						"v1",
+						"collections",
+						":collection",
+						"sessions",
+						":session",
+						"minmax"
+					],
+					"variable": [
+						{
+							"key": "collection",
+							"value": "schio"
+						},
+						{
+							"key": "session",
+							"value": "20201215_183218_Mirco_Skidpad_v0.0.0"
 						}
 					]
 				}
@@ -223,12 +346,12 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:3334/api/v1/data/:collection/:timestamp",
+					"raw": "http://localhost:3003/api/v1/data/:collection/:timestamp",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "3334",
+					"port": "3003",
 					"path": [
 						"api",
 						"v1",
@@ -276,12 +399,12 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:3334/api/v1/documents/:collection/:id",
+					"raw": "http://localhost:3003/api/v1/documents/:collection/:id",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "3334",
+					"port": "3003",
 					"path": [
 						"api",
 						"v1",
@@ -332,32 +455,37 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:3334/api/v1/data/:collection/:start/:finish",
+					"raw": "http://localhost:3003/api/v1/data/:collection/:session/:start/:finish",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "3334",
+					"port": "3003",
 					"path": [
 						"api",
 						"v1",
 						"data",
 						":collection",
+						":session",
 						":start",
 						":finish"
 					],
 					"variable": [
 						{
 							"key": "collection",
-							"value": "nicola-autocross"
+							"value": "schio"
+						},
+						{
+							"key": "session",
+							"value": "20201215_174858_Mirco_Acceleration_v0.0.0"
 						},
 						{
 							"key": "start",
-							"value": "1582483095032"
+							"value": "1608054538900"
 						},
 						{
 							"key": "finish",
-							"value": "1582483097140"
+							"value": "1608054540400"
 						}
 					]
 				}

@@ -40,6 +40,17 @@ export default function (): express.Router {
 
     /**
      * @swagger
+     * /api/collections/:collection/sessions/:session/minmax:
+     *  get:
+     *    description: This endpoint returns minimum and max timestamp in a session  
+     *  responses:
+     *      '200':
+     *        description: A successful response
+     */
+     router.get('/collections/:collection/sessions/:session/minmax', RouteController.getSessionMinMaxTimestamp);
+
+    /**
+     * @swagger
      * /api/v1/:collection/:timestamp:
      *  get:
      *    description: This endpoint returns the data with a certain timestamp
@@ -51,14 +62,14 @@ export default function (): express.Router {
 
     /**
      * @swagger
-     * /api/v1/data/:collection/:start/:finsh:
+     * /api/v1/data/:collection/:session/:start/:finsh:
      *  get:
      *    description: This endpoint returns the data from a certain timestamp to another
      *  responses:
      *      '200':
      *        description: A successful response
      */
-    router.get('/data/:collection/:start/:finish', RouteController.getManyFromTimestamp);
+    router.get('/data/:collection/:session/:start/:finish', RouteController.getManyFromTimestamp);
 
     /**
      * @swagger

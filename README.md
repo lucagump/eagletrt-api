@@ -20,6 +20,7 @@ The main focus is to serve the webapp by giving the data to render the charts of
 ### Todo 
 
 + [ ] Fix port from config
++ [ ] MongoDB Paging [Guide] (https://scalegrid.io/blog/fast-paging-with-mongodb/)
 + [ ] Authentication
 + [ ] New Tests
 + [ ] Joi Airtable

@@ -83,7 +83,7 @@ export class DocumentController {
                 'sessionName': session,
                 'id': { $ne : undefined}
             };
-            var data = await collection.find(query).toArray();
+            var data = await collection.find(query).sort({timestamp:1}).toArray();
 
             return data
         } catch (error) {
@@ -92,6 +92,55 @@ export class DocumentController {
             await client.close();
         }            
     };
+
+        // Get minimum and max timestamp in a session
+        public async getSessionMinMaxTimestamp(collectionName: string,session: string) {
+
+            const client = await MongoClient.connect(config.databaseUrl as string, config.databaseConfig)
+                .catch(err => { console.log(err); });
+    
+            if (!client) {
+                console.log('error')
+                return {"error":"Database connection error"}
+            }
+    
+            try {
+                const db = client.db(config.databaseNameTest as string);
+                var collection = db.collection(collectionName);
+                
+                const pipeline = [
+                    {
+                        '$match': {
+                            'sessionName': session,
+                            'id': { $ne : undefined}
+                        }
+                    },
+                    {
+                        '$project': {
+                            'timestamp': 1,
+                        }
+                    },
+                    {
+                        '$group': {
+                            "_id": null,
+                            'min': { '$min': '$timestamp' },
+                            'max': { '$max': '$timestamp' }
+                        }
+                    }
+                ];
+
+                var data = await collection.aggregate(pipeline).toArray();
+
+                return { 
+                    min: data[0].min,
+                    max: data[0].max
+                }
+            } catch (error) {
+                return {"error":"Database query error"}
+            } finally {
+                await client.close();
+            }            
+        };
 
     // Get document with a certain timestamp 
     public async getByTimestamp(collectionName: string, timestamp: Number) {
@@ -142,7 +191,7 @@ export class DocumentController {
     };
 
     // Get Documents by interval of values
-    public async getManyFromTimestamp(collectionName: string, start: Number, finish: Number) {
+    public async getManyFromTimestamp(collectionName: string, session: string, start: Number, finish: Number) {
         const client = await MongoClient.connect(config.databaseUrl as string, config.databaseConfig)
         .catch(err => { console.log(err); });
 
@@ -154,13 +203,26 @@ export class DocumentController {
         try {
             const db = client.db(config.databaseNameTest as string);
             var collection = db.collection(collectionName);
-            const query = {
-                timestamp: {
-                    $gte: start,
-                    $lte: finish
+
+            const pipeline = [
+                {
+                    '$match': {
+                        'sessionName': session,
+                        'id': { $ne : undefined}
+                    }
+                },
+                {
+                    '$match': {
+                        'timestamp': {
+                            $gte: start,
+                            $lte: finish
+                        }
+                    }
                 }
-            };
-            var data = await collection.find(query).toArray();
+            ];
+
+            var data = await collection.aggregate(pipeline).toArray();
+
             return data
         } catch (error) {
             console.log(error)

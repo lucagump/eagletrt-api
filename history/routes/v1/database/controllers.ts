@@ -42,6 +42,22 @@ export module RouteController {
         }
     };
 
+    export async function getSessionMinMaxTimestamp(req: Request, res: Response) {
+        try {
+            if(req.params.collection != null && req.params.session != null){
+                var collection = req.params.collection
+                var session = req.params.session
+
+                var data = await historyController.getSessionMinMaxTimestamp(collection,session);
+                res.json({'session': session, data});
+            } else {
+                res.status(400).json({'error': 'invalid req'})
+            }
+        } catch (error) {
+            res.json({"error": error});
+        }
+    };
+
     export async function getByTimestamp(req: Request, res: Response) {
         try {
             if(req.params.collection != null && req.params.timestamp != null){
@@ -80,12 +96,13 @@ export module RouteController {
     
     export async function getManyFromTimestamp(req: Request, res: Response) {
         try {
-            if(req.params.collection != null && req.params.start != null && req.params.finish != null){
+            if(req.params.collection != null && req.params.session != null && req.params.start != null && req.params.finish != null){
                 
                 var collection = req.params.collection
+                var session = req.params.session
                 var start = parseInt(req.params.start)
                 var finish = parseInt(req.params.finish)
-                var data = await historyController.getManyFromTimestamp(collection,start,finish);
+                var data = await historyController.getManyFromTimestamp(collection,session,start,finish);
                 
                 res.json({'documents': data});
             } else {
