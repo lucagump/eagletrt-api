@@ -1,7 +1,7 @@
 version: '3.8'
 services:
-  authentication:
-    build: ./authentication
+  apigateway:
+    build: ./api-gateway
     ports:
     - "5000:3000"  
 

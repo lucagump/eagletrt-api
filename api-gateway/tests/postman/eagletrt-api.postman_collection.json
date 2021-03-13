@@ -1,0 +1,496 @@
+{
+	"info": {
+		"_postman_id": "426e7401-a9f5-4496-8bec-039aa1d78166",
+		"name": "eagletrt-api/history",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "status",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3003/status",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3003",
+					"path": [
+						"status"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "docs api",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3003/api-docs/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3003",
+					"path": [
+						"api-docs",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "testrun collections",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"let jsonData = pm.response.json();\r",
+							"\r",
+							"pm.test(\"GET Request\", function (){\r",
+							"    pm.response.to.have.status(200);\r",
+							"})\r",
+							"\r",
+							"pm.test(\"JSON Data Response\", function (){\r",
+							"    pm.expect(jsonData)\r",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3003/api/v1/collections",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3003",
+					"path": [
+						"api",
+						"v1",
+						"collections"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "testrun sessions",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"let jsonData = pm.response.json();\r",
+							"\r",
+							"pm.test(\"GET Request\", function (){\r",
+							"    pm.response.to.have.status(200);\r",
+							"})\r",
+							"\r",
+							"pm.test(\"JSON Data Response\", function (){\r",
+							"    pm.expect(jsonData)\r",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"timestamp\":[1582483097140]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3003/api/v1/collections/:collection/sessions",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3003",
+					"path": [
+						"api",
+						"v1",
+						"collections",
+						":collection",
+						"sessions"
+					],
+					"variable": [
+						{
+							"key": "collection",
+							"value": "schio"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "session documents",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"let jsonData = pm.response.json();\r",
+							"\r",
+							"pm.test(\"GET Request\", function (){\r",
+							"    pm.response.to.have.status(200);\r",
+							"})\r",
+							"\r",
+							"pm.test(\"JSON Data Response\", function (){\r",
+							"    pm.expect(jsonData)\r",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"timestamp\":[1582483097140]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3003/api/v1/collections/:collection/sessions/:session",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3003",
+					"path": [
+						"api",
+						"v1",
+						"collections",
+						":collection",
+						"sessions",
+						":session"
+					],
+					"variable": [
+						{
+							"key": "collection",
+							"value": "schio"
+						},
+						{
+							"key": "session",
+							"value": "20201215_174858_Mirco_Acceleration_v0.0.0"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "session min max timestamp",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"let jsonData = pm.response.json();\r",
+							"\r",
+							"pm.test(\"GET Request\", function (){\r",
+							"    pm.response.to.have.status(200);\r",
+							"})\r",
+							"\r",
+							"pm.test(\"JSON Data Response\", function (){\r",
+							"    pm.expect(jsonData)\r",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"timestamp\":[1582483097140]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3003/api/v1/collections/:collection/sessions/:session/minmax",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3003",
+					"path": [
+						"api",
+						"v1",
+						"collections",
+						":collection",
+						"sessions",
+						":session",
+						"minmax"
+					],
+					"variable": [
+						{
+							"key": "collection",
+							"value": "schio"
+						},
+						{
+							"key": "session",
+							"value": "20201215_183218_Mirco_Skidpad_v0.0.0"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "data by timestamp",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"let jsonData = pm.response.json();\r",
+							"\r",
+							"pm.test(\"GET Request\", function (){\r",
+							"    pm.response.to.have.status(200);\r",
+							"    // pm.expect(jsonData.args.isGood).to.eql('true');\r",
+							"    // pm.expect(jsonData.args.isBad).to.eql('false');\r",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3003/api/v1/data/:collection/:timestamp",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3003",
+					"path": [
+						"api",
+						"v1",
+						"data",
+						":collection",
+						":timestamp"
+					],
+					"variable": [
+						{
+							"key": "collection",
+							"value": "nicola-autocross"
+						},
+						{
+							"key": "timestamp",
+							"value": "1582483095032"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "documents by id",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"let jsonData = pm.response.json();\r",
+							"\r",
+							"pm.test(\"GET Request\", function (){\r",
+							"    pm.response.to.have.status(200);\r",
+							"    // pm.expect(jsonData.args.isBad).to.eql('false');\r",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3003/api/v1/documents/:collection/:id",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3003",
+					"path": [
+						"api",
+						"v1",
+						"documents",
+						":collection",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "collection",
+							"value": "nicola-autocross"
+						},
+						{
+							"key": "id",
+							"value": "2"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "from timestamp start to finish",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"let jsonData = pm.response.json();\r",
+							"\r",
+							"pm.test(\"GET Request\", function (){\r",
+							"    pm.response.to.have.status(200);\r",
+							"})\r",
+							"\r",
+							"pm.test(\"JSON Data Response\", function (){\r",
+							"    pm.expect(jsonData)\r",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3003/api/v1/data/:collection/:session/:start/:finish",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3003",
+					"path": [
+						"api",
+						"v1",
+						"data",
+						":collection",
+						":session",
+						":start",
+						":finish"
+					],
+					"variable": [
+						{
+							"key": "collection",
+							"value": "schio"
+						},
+						{
+							"key": "session",
+							"value": "20201215_174858_Mirco_Acceleration_v0.0.0"
+						},
+						{
+							"key": "start",
+							"value": "1608054538900"
+						},
+						{
+							"key": "finish",
+							"value": "1608054540400"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

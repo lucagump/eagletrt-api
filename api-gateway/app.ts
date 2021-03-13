@@ -1,64 +1,48 @@
-import { Request, Response } from 'express';
-import express from 'express';
-import request from 'request';
-import jwt from 'jsonwebtoken';
+import express from 'express'
+import { Loader } from './loaders';
+import Logger from './loaders/logger';
 
-const app = express();
-
-const airtableUrl = 'http://localhost:3001/api/v1';
-
-/* 
-    this should rediret to the right microservice.
-    TO DO: 
-        - use the jsonwebtoken to provide auth
-        - in route/gateway/index.ts write all the client routes
-        - in eventbus/eventExample/index.ts write all the events that should be consumed by other microservices 
-*/
-app.get('/airtable', function(req, res, next) {
-  request(`${airtableUrl}/products`).pipe(res);
-});
-
-app.get('/api', function (req,res) {
-    res.json({
-        text: 'api',
-    });
-});
-
-app.post('/api/login', function (req: Request, res: Response) {
-    const user = { id: 3};
-    const token = jwt.sign({user}, 'thats_amore_findus')
-    res.json({
-        text: 'api',
-        token: token
-    });
-});
-
-app.get('/api/protected', checkToken, function (req: Request, res: Response) {
-    jwt.verify(req.token, 'thats_amore_findus', function (err,data) {
-        if (err) {
-            res.sendStatus(403);
-        } else {
-            res.json({
-                text: 'api is protected',
-                data: data
-            });
-        }
-    })
-});
-
-function checkToken(req: Request, res: Response, next){
-    const bearerHeader = req.headers['authorization'];
-    if (typeof bearerHeader !== 'undefined'){
-        const bearer = bearerHeader.split(" ");
-        const bearerToken = bearer[1];
-        req.token = bearerToken;
-        next();
-    } else {
-        res.sendStatus(403);
+function normalizePort(val: string | number | undefined, fallback = 3000): number {
+    if (typeof val === 'string') {
+        const port = parseInt(val, 10);
+        if (!isNaN(port) && port > 0)
+            return port;
+    } else if (typeof val === 'number' && val > 0) {
+        return val;
     }
+    return fallback;
 }
 
-app.listen(3000, function () {
-    console.log('App is listening on port 3000')
+function start(app: express.Application, defPort: number | undefined = undefined) {
+    const port = normalizePort(defPort ? defPort : process.env.PORT);
 
-})
+    /**
+     * A little hack here
+     * Import/Export can only be used in 'top-level code'
+     * Well, at least in node 10 without babel and at the time of writing
+     * So we are using good old require.
+     **/
+    // await require('./loaders').default({ expressApp: app });
+    Loader.defaultLoader({ app });
+
+    const server = app.listen(port, () => {
+        Logger.info(`⚡️[server]: Server is running at https://localhost:${port}⚡️`);
+
+      }).on('error', err => {
+        Logger.error(err);
+        process.exit(1);
+      });
+    
+    process.on('SIGINT', () => {
+        console.log('Killing the server');
+        console.log('Connection closed');
+        server.close();
+        process.exit();
+    });
+}
+
+// export default app; // for testing
+export default function(defPort: number | undefined = undefined) {
+    const app = express();
+    start(app, defPort);
+}
