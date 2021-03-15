@@ -328,7 +328,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"jwt\": \"wa3223s432dfgfterfwef43tg\"\r\n}",
+					"raw": "{\r\n    \"jwt\": \"wa3223s432dfgfterfwef3tg\",\r\n    \"password\": \"araHara123\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"

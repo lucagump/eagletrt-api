@@ -36,12 +36,23 @@ export default function (): express.Router {
      *      '200':
      *        description: A successful response
      */
-         router.get('/users/username/:username', RouteController.getUserByUsername);
+    router.get('/users/username/:username', RouteController.getUserByUsername);
+
+    /**
+     * @swagger
+     * /api/v1/users:
+     *  post:
+     *    description: Use to insert a user
+     *  responses:
+     *      '201':
+     *        description: A successful response
+     */
+    router.post('/users', RouteController.post);
 
     /**
      * @swagger
      * /api/v1/users/:userID:
-     *  post:
+     *  put:
      *    description: Use to update user jwt
      *  parameters:
      *    - name: users
@@ -56,6 +67,17 @@ export default function (): express.Router {
      *        description: Successfully updated user
      */
     router.put('/users/:userID', RouteController.update);
+
+    /**
+     * @swagger
+     * /api/v1/users:
+     *  delete:
+     *    description: Use to insert a user
+     *  responses:
+     *      '201':
+     *        description: A successful response
+     */
+    router.delete('/users/:username', RouteController.deleteUser);
     
     return router;
 
