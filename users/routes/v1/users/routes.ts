@@ -53,7 +53,7 @@ export default function (): express.Router {
      * @swagger
      * /api/v1/users/:userID:
      *  put:
-     *    description: Use to update user jwt
+     *    description: Use to update user jwt and password
      *  parameters:
      *    - name: users
      *      in: query
@@ -67,6 +67,25 @@ export default function (): express.Router {
      *        description: Successfully updated user
      */
     router.put('/users/:userID', RouteController.update);
+
+    /**
+     * @swagger
+     * /api/v1/users/:userID:
+     *  put:
+     *    description: Use to update user jwt 
+     *  parameters:
+     *    - name: users
+     *      in: query
+     *      description: Name of our user
+     *      required: false
+     *      schema:
+     *        type: string
+     *        format: string
+     *  responses:
+     *      '201':
+     *        description: Successfully updated user
+     */
+         router.put('/users/:userID/token', RouteController.updateToken);
 
     /**
      * @swagger

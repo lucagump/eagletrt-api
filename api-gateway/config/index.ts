@@ -12,7 +12,7 @@ export default {
   /**
    * Your favorite port and host URL
    */
-  port: process.env.HISTORY_PORT,
+  port: process.env.GATEWAY_PORT,
   baseurl: process.env.BASE_URL,
   /**
    * Postman env variables
@@ -31,5 +31,11 @@ export default {
    * Used by jsonwebtoken
   */
   secretSHSH: process.env.TOKEN_SECRET,
-  loginRedirectUrl: process.env.LOGIN_REDIRECT
+  loginRedirectUrl: process.env.LOGIN_REDIRECT,
+  /**
+   * Used to forward to microservice
+  */
+  history: process.env.HISTORY_PORT,
+  users: process.env.USERS_PORT,
+  views: process.env.views_PORT
 }

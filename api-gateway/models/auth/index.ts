@@ -5,32 +5,35 @@ interface UserLogin {
     password: string;
 }
 
-interface UserUpdate extends UserLogin{
-    displayName?: string;
-    email?: string;
-    newPassword?: string;
+interface NewUser {
+    name: string;
+    surname: string;
+    username: string;
+    password: string;
+    jwt: string;
 }
 
-export class AuthModels {
+export module AuthModels {
 
-    public validateUpdate(user: unknown): { value?: UserUpdate, error?: string } {
+    export function validateCreateUser(user: unknown): { value?: NewUser, error?: string } {
 
         const validate = joi.object({
+            name: joi.string().min(3).required(),
+            surname: joi.string().min(3).required(),
             username: joi.string().min(6).required(),
             password: joi.string().min(6).required(),
-            email: joi.string().email(),
-            newPassword: joi.string().min(6)
+            jwt: joi.string().min(6)
         }).validate(user);
 
         if (validate.error) {
             return { error: validate.error.message };
         }
 
-        return {value: (user as UserUpdate)};
+        return {value: (user as NewUser)};
         
     }
 
-    public validateLogin(user: unknown): { value?: UserLogin, error?: string } {
+    export function validateLogin(user: unknown): { value?: UserLogin, error?: string } {
 
         const validate = joi.object({
             username: joi.string().min(6).required(),

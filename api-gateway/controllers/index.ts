@@ -1,10 +1,13 @@
-import { GatewayController } from './gateway';
+import { AuthController } from './authentication';
 import { JWTController } from './jwt';
+import { APIController } from './api-controller';
 
-const gatewayController = new GatewayController();
-const jwtController = new JWTController();
+const authController = AuthController;
+const jwtController = JWTController;
+const apiController = APIController;
 
 export {
-    gatewayController,
-    jwtController
+    authController,
+    jwtController,
+    apiController
 };

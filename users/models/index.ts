@@ -1,6 +1,6 @@
 import { AuthModels } from './auth';
 
-const AuthModel = new AuthModels();
+const AuthModel = AuthModels;
 
 export {
     AuthModel

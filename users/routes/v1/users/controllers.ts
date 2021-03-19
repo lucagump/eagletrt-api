@@ -33,7 +33,7 @@ export module RouteController {
             if(req.params.username !== null) {
                 var data = await userController.getUserByUsername(req.params.username);
                 if (Object.keys(data).length === 0){
-                    return res.status(404).json(data)
+                    return res.status(404).json({error: 'Username not found'})
                 }
                 res.status(200).json(data);
             } else{
@@ -46,11 +46,28 @@ export module RouteController {
 
     export async function update(req: Request, res: Response) {
         try {
-            if(req.params.userID !== null && req.body.jwt !== null && req.body.password !== null) {
-                var data = await userController.updateUser(req.params.userID,req.body.jwt,req.body.password);
-                res.status(201).json(data);
-            } else{
+            req.body.id = req.params.userID;
+            const user = AuthModel.validateUpdateUser(req.body);
+            if(!user.value) {
                 res.status(400).json({error: "Bad Parameters"})
+            } else{
+                var data = await userController.updateUser(user);
+                res.status(201).json(data);
+            }
+        } catch (error) {
+            res.status(500).json(error);
+        }
+    }
+
+    export async function updateToken(req: Request, res: Response) {
+        try {
+            req.body.id = req.params.userID;
+            const user = AuthModel.validateUpdateToken(req.body);
+            if(!user.value) {
+                res.status(400).json({error: "Bad Parameters"})
+            } else{
+                var data = await userController.updateToken(user);
+                res.status(201).json(data);
             }
         } catch (error) {
             res.status(500).json(error);

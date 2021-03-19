@@ -19,12 +19,13 @@ export class UserController {
             try {
                 const records = await base('Users').select().firstPage();
                 
-                records.forEach((element: { id: any; fields: { Name: any; Surname: any; Username: any; Checked: any; JWT: any; }; }) => {
+                records.forEach((element: { id: any; fields: { Name: any; Surname: any; Username: any; Password: any;Checked: any; JWT: any; }; }) => {
                     data.push({
                         id: element.id, 
                         name: element.fields.Name,
                         surname: element.fields.Surname,
                         username: element.fields.Username,
+                        password: element.fields.Password,
                         checked: element.fields.Checked,
                         jwt: element.fields.JWT
                     }) 
@@ -79,16 +80,48 @@ export class UserController {
             return { error: error.message }
         }
     }
-    
-    public async updateUser(userID: String, jwt: String, password: String) {
+ 
+    public async updateToken(user: any) {
         var base = this.connectAirtable();
         if(base !== undefined){
             try {
+
                 var userUpdated = await base('Users').update([{
-                    "id": userID,
+                    "id": user.value.id,
                     "fields": {
-                        "Password": password,
-                        "JWT": jwt
+                        "JWT": user.value.jwt
+                    }
+                }]);
+                var data = {
+                    id: userUpdated[0].id,
+                    name: userUpdated[0].fields.Name,
+                    surname: userUpdated[0].fields.Surname,
+                    username: userUpdated[0].fields.Username,
+                    password: userUpdated[0].fields.Password,
+                    checked: userUpdated[0].fields.Checked,
+                    jwt: userUpdated[0].fields.JWT
+                }
+                return data
+            } catch (error) {
+                return {error: 'Wrong userID bro :('}
+            }
+        } else {
+            return {error: 'Error connecting to Airtable'}
+        }
+    }
+    
+    public async updateUser(user: any) {
+        var base = this.connectAirtable();
+        if(base !== undefined){
+            try {
+                const salt = await bcrypt.genSalt();
+                const hashedPassword = await bcrypt.hash(user.value.password, salt);
+
+                var userUpdated = await base('Users').update([{
+                    "id": user.value.id,
+                    "fields": {
+                        "Password": hashedPassword,
+                        "JWT": user.value.jwt
                     }
                 }]);
                 var data = {
@@ -134,8 +167,7 @@ export class UserController {
                         "Password": hashedPassword
                       }
                 }]);
-
-                return record[0].fields
+                return {id: record[0].id, fields: record[0].fields}
             } catch (error) {
                 return {error: error.message }
             }
@@ -149,13 +181,13 @@ export class UserController {
         if(base !== undefined){
             try {
                 var userToDelete = await this.getUserByUsername(username);
-                if (userToDelete === {}){
+
+                if (Object.keys(userToDelete).length === 0){
                     return {error: 'Error connecting to Airtable'}
+                } else {
+                    const record = await base('Users').destroy(userToDelete.id)
+                    return record.id
                 }
-                
-                const record = await base('Users').destroy(userToDelete.id)
-                console.log(record)
-                return record.id
             } catch (error) {
                 console.log(error)
                 return error.message

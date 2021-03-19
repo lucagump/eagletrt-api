@@ -1,5 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
 import jwt from 'jsonwebtoken';
+import axios from 'axios';
 import config from './../../config'
 
 function handleUnauthorized(res: Response) {
@@ -14,9 +15,9 @@ function handleUnauthorized(res: Response) {
     }
 }
 
-export class JWTController {
+export module JWTController {
 
-    public auth(req: Request, res: Response, next: NextFunction): void {
+    export function auth(req: Request, res: Response, next: NextFunction): void {
         if (req.method === 'OPTIONS') {
             next();
             return;
@@ -35,13 +36,21 @@ export class JWTController {
         }
     }
 
-    public addToken(res: Response, user: { username: string, password: string}): Response {
-        const token = jwt.sign(user, config.secretSHSH as string);
-        // chiama airtable (update token)
-        return res.header('Authentication', token);
+    export async function addToken(res: Response, user: { username: string, password: string }, id: string): Response {
+      const token = jwt.sign(user, config.secretSHSH as string);
+      axios.put(config.baseurl + ":3001" + "/api/v1/users/" + id + "/token",
+        {
+          "jwt": token
+        }
+      );
+      return res.header('Authentication', token);
     }
 
-    public newAuth(req: Request, res: Response, next: NextFunction): void {
+    export async function createToken(user: { username: string, password: string}){
+      return jwt.sign(user, config.secretSHSH as string);
+    }
+
+    export function newAuth(req: Request, res: Response, next: NextFunction): void {
         try {
             const authorization = req.headers.authorization;
             if (!authorization) {
