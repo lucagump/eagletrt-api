@@ -9,7 +9,7 @@ FROM base as dev
 ENV NODE_ENV=development
 RUN npm install -g concurrently && npm install
 
-EXPOSE 3003
+EXPOSE 3000
 
 COPY . .
 CMD ["npm", "start"]

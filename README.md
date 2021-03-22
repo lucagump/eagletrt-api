@@ -6,7 +6,7 @@
 ## Technologies
 
 This project consists of an [express](https://expressjs.com/) rest API server written in Typescript.
-It's a cloud-based application. It's built with different microservices developed with Node Js, Docker, NGINX, MongoDB, MQTT and RabbitMQ. The project is up and running (_i hope_) [here](https://theuselessweb.com/).
+It's a cloud-based application. It's built with different microservices developed with Node Js, Docker, NGINX, MongoDB and MQTT. The project is up and running (_i hope_) [here](https://theuselessweb.com/).
 
 ## Goal
 
@@ -20,11 +20,13 @@ The main focus is to serve the webapp by giving the data to render the charts of
 ### Todo 
 
 + [ ] Fix port from config
++ [X] Authentication
 + [ ] MongoDB Paging [Guide] (https://scalegrid.io/blog/fast-paging-with-mongodb/)
-+ [ ] Authentication
-+ [ ] New Tests
-+ [ ] Joi Airtable
++ [X] Joi Airtable
++ [ ] Typedoc
++ [ ] Mockup web-app
 + [ ] Swagger to NGINX Configuration [Script] (https://gist.github.com/nginx-gists/37ce65292a06219ff8d35d293c05e0b5#file-oas2nginx-sh)
++ [X] New Tests
 + [ ] Check NGINX configuration 
 + [ ] Heroku CI
 + [X] Dockerfile
@@ -32,8 +34,18 @@ The main focus is to serve the webapp by giving the data to render the charts of
 
 
 ## MicroServices
+![SchemaOverview](documents/template.jpg)
+
+The template used to build the microservice architecture is described above. 
+It consists of four main folder:  
+* **loaders**: to inject dependencies, routes and all sort of configuration. 
+* **routes**: where the route of the API are described with the swagger code. It also has a _controller.ts_ to handle requests.
+* **controllers**: it's where the magic is, all the sauce of the project. This folder contains all the functions used to retrieve data from the  database or to interact with external API.
+* **tests**: it runs the application as a different process in order to test _newman_ requests.
+* **config**: with the _index.ts_ it's possible to load all the .env variables, it's based on the environment (test or production) 
 
 ### NGiNX
+![SchemaOverview](documents/nginx.jpg)
 
 NGINX is an open-source web server that also serves as a reverse proxy and HTTP load balancer.
 As reverse proxy it sits in front of our microservices and API Gateway. When a browser makes an HTTP request, the request first goes to the reverse proxy, by checking the API Key for the user, which then sends the request to the appropriate microservice. It is straightforward and lightweight, but in future the authentication process will be handled differently.
