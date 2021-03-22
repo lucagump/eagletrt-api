@@ -13,9 +13,9 @@ It's a cloud-based application. It's built with different microservices develope
 This application is the result of the continuos research of the telemtry group from 2018 untill 2021. The result is a maintainable application to serve the telemtry web-app used byt the member of the team.
 The main focus is to serve the webapp by giving the data to render the charts of the vehicle during the tests. Each user should have the possiblity to see a customizable page with charts and configuration of the vehicle. Further user stories could be implemented starting from this _zero_ version of the software.
 
-## Project Structure (Draft Version)
+## Project Structure (Version 1)
 
-![SchemaOverview](documents/draft-version.PNG)
+![SchemaOverview](documents/charts.png)
 
 ### Todo 
 
@@ -44,22 +44,27 @@ The API Gateway is responsible for request routing, composition, and protocol tr
 appropriate microservice. The API Gateway will often handle a request by invoking multiple microservices and aggregating the results. 
 
 ### History
+![SchemaOverview](documents/charts-history.png)
 
 The History microservice is used to serve the web-app with all the documents, data of the vehicle. This microservice consists of and adapter layer to get the information from a schema-less database (MongoDB on Atlas and inside the University of Trento)
 
 ### Users
+![SchemaOverview](documents/charts-users.png)
 
 The Airtable microservice is used to serve the web-app with all the information about the user and their personalized views based on their role. This microservice consists of and adapter layer to get the information from a Airtable.
 
 ### Views
+![SchemaOverview](documents/charts-views.png)
 
 The Views microservice is used to serve the web-app with all the information about the personalized views based on the user role. This microservice consists of and adapter layer to get the information from a Airtable.
 
 ### Live
+![SchemaOverview](documents/charts-mqtt.png)
 
 The Live microservice is used to insert the documents/data sent from the vehicle. This microservice consists of proxy for the messages receive on the vehicle _topic_. The broker is _broker.mqttdashboard.com_.
 
 ### MQTT Publisher
+![SchemaOverview](documents/charts-mqtt.png)
 
 The MQTT Publisher microservice is to intend as a _test_ service to emulate the condition of the car which is sending data to the online application.
 

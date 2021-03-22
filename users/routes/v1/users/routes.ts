@@ -85,7 +85,7 @@ export default function (): express.Router {
      *      '201':
      *        description: Successfully updated user
      */
-         router.put('/users/:userID/token', RouteController.updateToken);
+    router.put('/users/:userID/token', RouteController.updateToken);
 
     /**
      * @swagger
