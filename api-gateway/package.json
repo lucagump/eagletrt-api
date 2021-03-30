@@ -10,6 +10,7 @@
     "transpile": "tsc",
     "start:build": "tsc -w",
     "start:run": "nodemon dist/app.js",
+    "script": "./start.sh",
     "start": "concurrently npm:start:*",
     "commit": "git-cz",
     "commit:sign": "git-cz -S",

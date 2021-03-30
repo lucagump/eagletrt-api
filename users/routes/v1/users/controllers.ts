@@ -95,7 +95,7 @@ export module RouteController {
                 if (data.error !== undefined){
                     return res.status(404).json({error: "user not found"})
                 }
-                res.status(200).json({userid: data});
+                res.status(200).json({userid: data.id});
             } else{
                 res.status(400).json({error: "Bad Parameters"})
             }

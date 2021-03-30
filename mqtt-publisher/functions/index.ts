@@ -54,13 +54,13 @@ export module helpers {
                 'throttle': throttle,
                 'brake': brake,
                 'x_a': x_a,
-                'y_a': y_b,
-                'z_a': z_c,
+                'y_a': y_a,
+                'z_a': z_a,
                 'x_b': x_b,
                 'y_b': y_b,
                 'z_b': z_b,
                 'x_c': x_c,
-                'y_c': y_b,
+                'y_c': y_c,
                 'z_c': y_c,
                 'voltage': voltage,
                 'current_a': current_a,
@@ -70,6 +70,6 @@ export module helpers {
 
             }));
 
-        }, config.msFrequency);
+        }, 10000);
     }
 }

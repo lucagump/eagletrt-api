@@ -7,11 +7,12 @@ COPY . .
 FROM base as dev
 
 ENV NODE_ENV=development
-RUN npm install -g concurrently && npm install
+RUN npm install
+RUN npm run transpile
 
 EXPOSE 3002
 
 COPY . .
-CMD ["npm", "start"]
+CMD ["node", "dist/index.js"]
 
 

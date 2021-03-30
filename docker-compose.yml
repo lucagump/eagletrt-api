@@ -1,6 +1,6 @@
 version: '3.8'
 services:
-  apigateway:
+  api-gateway:
     build: ./api-gateway
     ports:
     - "5000:3000"  
@@ -15,20 +15,25 @@ services:
     ports:
     - "5002:3002"  
 
-  history:
+  history-a:
     build: ./history
     ports:
     - "5003:3003"
+  
+  history-b:
+    build: ./history
+    ports:
+    - "5004:3003"
 
   live:
     build: ./live
     ports:
-    - "5004:3004"
+    - "5005:3004"
 
-  mqtt-pubblisher:
-    build: ./mqtt-publisher
-    ports:
-    - "5005:3005"
+  # mqtt-pubblisher:
+  #   build: ./mqtt-publisher
+  #   ports:
+  #   - "5006:3005"
 
   nginx:
     restart: always

@@ -36,6 +36,10 @@ export default {
   postmanAPIKey: process.env.POSTMAN_API_KEY,
   apiUrl: process.env.API_URL,
   /**
+   * Used by jsonwebtoken
+  */
+  secretSHSH: process.env.TOKEN_SECRET,
+  /**
    * Used by winston logger
    */
   logs: {

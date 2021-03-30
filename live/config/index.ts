@@ -13,6 +13,7 @@ export default {
    * Your favorite port and host URL
    */
   port: process.env.LIVE_PORT,
+  baseurl: process.env.BASE_URL,
   /**
    * Your favorite MQTTT port and broker host 
    */
@@ -34,7 +35,13 @@ export default {
     useNewUrlParser: true,
     useUnifiedTopology: true
   },
-
+  /**
+   * Used by jsonwebtoken
+   */
+  secretSHSH: process.env.TOKEN_SECRET,
+  /**
+   * Used by winston logger
+   */
   logs: {
     level: process.env.LOG_LEVEL || 'silly',
   },

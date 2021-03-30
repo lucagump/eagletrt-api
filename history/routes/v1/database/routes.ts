@@ -1,10 +1,14 @@
 import express from 'express';
 import { RouteController } from './controllers';
+import { jwtController } from '../../../controllers';
 
 export default function (): express.Router {
 
     const router = express.Router();
-    
+    router.use("/collections", jwtController.auth);
+    router.use("/documents", jwtController.auth);
+    router.use("/data", jwtController.auth);
+
     /**
      * @swagger
      * /api/v1/collections:

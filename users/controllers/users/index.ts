@@ -14,10 +14,10 @@ export class UserController {
 
     public async getUsers() {
         var base: any = this.connectAirtable();
-        var data: Array<any> = [];
         if(base !== undefined){
             try {
                 const records = await base('Users').select().firstPage();
+                var data: Array<any> = [];
                 
                 records.forEach((element: { id: any; fields: { Name: any; Surname: any; Username: any; Password: any;Checked: any; JWT: any; }; }) => {
                     data.push({
@@ -66,18 +66,31 @@ export class UserController {
     }
 
     public async getUserByUsername(username: any) {
-        try {
-            const records = await this.getUsers();
-            var data = {}
-            records.forEach((element: { username: any; }) => {
-                if(element.username == username) {
-                    data = element;
-                    return
-                }
-            });
-            return data
-        } catch (error) {
-            return { error: error.message }
+        var base: any = this.connectAirtable();
+        if(base !== undefined){
+            try {
+                const records = await base('Users').select().firstPage();
+                var data: Array<any> = [];
+                
+                records.forEach((element: { id: any; fields: { Name: any; Surname: any; Username: any; Password: any;Checked: any; JWT: any; }; }) => {
+                    if(element.fields.Username == username) {
+                        data.push({
+                            id: element.id, 
+                            name: element.fields.Name,
+                            surname: element.fields.Surname,
+                            username: element.fields.Username,
+                            password: element.fields.Password,
+                            checked: element.fields.Checked,
+                            jwt: element.fields.JWT
+                        }) 
+                    }
+                });
+                return data
+            } catch (error) {
+                return { error: error.message }   
+            }
+        } else {
+            return {error: 'Error connecting to Airtable'}
         }
     }
  
@@ -147,7 +160,8 @@ export class UserController {
         if(base !== undefined){
             try {
                 var userToInsert = await this.getUserByUsername(user.value.username);
-                if(userToInsert.username == user.value.username) {
+
+                if(Array.isArray(userToInsert)) {
                     return {error: "User already registered"}
                 }
 
@@ -180,20 +194,22 @@ export class UserController {
         var base = this.connectAirtable();
         if(base !== undefined){
             try {
-                var userToDelete = await this.getUserByUsername(username);
+                const records = await base('Users').select().firstPage();
+                var userToDelete: Array<any> = [];
+                
+                records.forEach((element: { id: any; fields: { Username: any; }; }) => {
+                    if(element.fields.Username == username) {
+                        userToDelete.push(element.id) 
+                    }
+                });
 
-                if (Object.keys(userToDelete).length === 0){
-                    return {error: 'Error connecting to Airtable'}
-                } else {
-                    const record = await base('Users').destroy(userToDelete.id)
-                    return record.id
-                }
+                const record = await base('Users').destroy(userToDelete[0])
+                return { id: record.id}
             } catch (error) {
-                console.log(error)
-                return error.message
+                return { error: error.message }
             }
         } else {
-            return {}
+            return { error: 'Error connecting to Airtable' }
         }
     }
 }

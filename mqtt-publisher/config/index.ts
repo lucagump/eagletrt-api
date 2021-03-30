@@ -15,7 +15,6 @@ export default {
   mqttPort: process.env.MQTT_PORT,
   mqttHostname: process.env.MQTT_HOSTNAME,
   topic: process.env.MQTT_TOPIC,
-  msFrequency: process.env.MQTT_FREQUENCY,
   /**
    * Winston config 
    */  

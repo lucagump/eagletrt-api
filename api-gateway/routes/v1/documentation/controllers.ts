@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import request from 'request';
 import config from '../../../config'
-import { gatewayController, jwtController, apiController } from '../../../controllers';
+
    
 export module RouteController {
         
@@ -11,7 +11,7 @@ export module RouteController {
                 var docsPort = config.port
                 switch (req.params.microservice) {
                     case 'history':
-                        docsPort = config.history;
+                        docsPort = "3003";
                         break;
                     case 'users':
                         docsPort = config.users;
@@ -24,14 +24,10 @@ export module RouteController {
                 }
                 const options = {
                     url: `http://localhost:${docsPort}/api-docs`,
-                    // headers: { roles: user.registrations[0].roles }
                 };
-                // request(options).pipe(res);
-                // apiController.redirect(req.path).then(resp => {
-                //     res.send(resp)
-                // })
+                request(options).pipe(res);
 
-                res.status(301).redirect(options.url);
+                // res.status(301).redirect(options.url);
 
             } else {
                 res.status(400).json({'error': 'invalid req'})

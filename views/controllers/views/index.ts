@@ -19,7 +19,9 @@ export class ViewController {
                 const records = await base('Views').select().firstPage();
                 
                 records.forEach((element: { id: any; fields: { Charts: any; }; }) => {
-                    data.push(element.fields.Charts) 
+                    if(Object.keys(element.fields).length !== 0) {
+                        data.push(element.fields.Charts) 
+                    }
                 });
 
                 return {data}
@@ -40,13 +42,13 @@ export class ViewController {
             try {
                 
                 const records = await base('Views').select().firstPage();
-                
                 records.forEach((element: { id: any; fields: { Charts: any; Username: any; }; }) => {
-                    if(element.fields.Username.includes(username)){
-                        data.push(element.fields.Charts) 
+                    if(Object.keys(element.fields).length !== 0) {
+                        if(element.fields.Username.includes(username)){
+                            data.push(element.fields.Charts) 
+                        }
                     }
                 });
-                
                 response = {
                     username: username,
                     data

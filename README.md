@@ -20,11 +20,13 @@ The main focus is to serve the webapp by giving the data to render the charts of
 ### Todo 
 
 + [ ] Fix port from config
++ [X] Auth Middleware History
++ [X] Views in api-gateway
 + [X] Authentication
 + [ ] MongoDB Paging [Guide] (https://scalegrid.io/blog/fast-paging-with-mongodb/)
 + [X] Joi Airtable
 + [ ] Typedoc
-+ [ ] Mockup web-app
++ [X] Mockup web-app
 + [ ] Swagger to NGINX Configuration [Script] (https://gist.github.com/nginx-gists/37ce65292a06219ff8d35d293c05e0b5#file-oas2nginx-sh)
 + [X] New Tests
 + [ ] Check NGINX configuration 
@@ -32,6 +34,22 @@ The main focus is to serve the webapp by giving the data to render the charts of
 + [X] Dockerfile
 + [X] docker-compsoe.yml
 
+## Webapp Mockup
+
+The webapp mockup is designed according to the feedback gathered via a questionnaire in 2019. 
+Other interactions are required to validate the usability and the complete set of functionalities needed for tests and race events.
+
+### Login
+
+![SchemaOverview](documents/Login.png)
+
+### Homepage - Menu
+
+![SchemaOverview](documents/Home.png)
+
+### Homepage - Menu
+
+![SchemaOverview](documents/Telemetry.png)
 
 ## MicroServices
 ![SchemaOverview](documents/template.jpg)
