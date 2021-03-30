@@ -47,7 +47,7 @@ Other interactions are required to validate the usability and the complete set o
 
 ![SchemaOverview](webapp/Home.png)
 
-### Homepage - Menu
+### Live/Telemetry
 
 ![SchemaOverview](webapp/Telemetry.png)
 
