@@ -41,15 +41,15 @@ Other interactions are required to validate the usability and the complete set o
 
 ### Login
 
-![SchemaOverview](documents/Login.png)
+![SchemaOverview](webapp/Login.png)
 
 ### Homepage - Menu
 
-![SchemaOverview](documents/Home.png)
+![SchemaOverview](webapp/Home.png)
 
 ### Homepage - Menu
 
-![SchemaOverview](documents/Telemetry.png)
+![SchemaOverview](webapp/Telemetry.png)
 
 ## MicroServices
 ![SchemaOverview](documents/template.jpg)
