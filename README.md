@@ -17,6 +17,7 @@ This application is the result of the continuous research of the telemetry group
 
 ### Todo 
 
++ [ ] Fix Tests :(((
 + [ ] Fix port from config
 + [ ] MongoDB Paging [Guide] (https://scalegrid.io/blog/fast-paging-with-mongodb/)
 + [ ] Typedoc
@@ -59,6 +60,7 @@ NGINX is an open-source web server that also serves as a reverse proxy and HTTP 
 As reverse proxy it sits in front of our microservices and API Gateway. When a browser makes an HTTP request, the request first goes to the reverse proxy, by checking the API Key for the user, which then sends the request to the appropriate microservice. It is straightforward and lightweight, but in future the authentication process will be handled differently.
 
 ### API Gateway
+![SchemaOverview](documents/charts-api-gateway.png)
 
 The API Gateway is responsible for request routing, composition, and protocol translation. All requests from clients first go through the API Gateway. It then routes requests to the
 appropriate microservice. The API Gateway will often handle a request by invoking multiple microservices and aggregating the results. 
