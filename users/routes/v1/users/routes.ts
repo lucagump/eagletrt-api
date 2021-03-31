@@ -20,7 +20,7 @@ export default function (): express.Router {
      * @swagger
      * /api/v1/users/:userID:
      *  get:
-     *    description: Use to request a user
+     *    description: Use to request a specific user by username
      *  responses:
      *      '200':
      *        description: A successful response
@@ -54,14 +54,6 @@ export default function (): express.Router {
      * /api/v1/users/:userID:
      *  put:
      *    description: Use to update user jwt and password
-     *  parameters:
-     *    - name: users
-     *      in: query
-     *      description: Name of our user
-     *      required: false
-     *      schema:
-     *        type: string
-     *        format: string
      *  responses:
      *      '201':
      *        description: Successfully updated user

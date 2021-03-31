@@ -13,7 +13,7 @@ const swaggerOptions = {
         servers: ["http://localhost:3001"]
       }
     },
-    apis: ['./routes/v1/users/routes.ts','./loaders/express/index.ts']
+    apis: ['./loaders/express/index.ts', './routes/v1/users/routes.ts']
   };
   
   const swaggerDocs = swaggerJsDoc(swaggerOptions);

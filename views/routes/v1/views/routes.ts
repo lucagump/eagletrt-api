@@ -12,7 +12,7 @@ export default function (): express.Router {
      *    description: Use to request all the views available
      *  responses:
      *      '200':
-     *        description: A successful response
+     *        description: Data with all the views available
      */
     router.get('/views', RouteController.get);
     
@@ -23,8 +23,10 @@ export default function (): express.Router {
      *    description: Use to request views by specific user
      *  responses:
      *      '200':
-     *        description: A successful response
-     */
+     *        description: Username and data as array with all the user views
+     *      '404':
+     *        description: Username and data empty
+    */
     router.get('/views/users/:username', RouteController.getUsersViews);
 
     return router;

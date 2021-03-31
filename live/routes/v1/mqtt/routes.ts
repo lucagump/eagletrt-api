@@ -14,7 +14,7 @@ export default function (): express.Router {
      *    description: This endpoint returns a Json with the configuration of the mqtt client
      *  responses:
      *      '200':
-     *        description: A successful response
+     *        description: A successful response with broker hostname, topic, port
      */
     router.get('/configuration', RouteController.getConfiguration);
 

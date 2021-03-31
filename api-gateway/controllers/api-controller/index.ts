@@ -13,6 +13,7 @@ export module APIController {
     // Request user views by the username
     export async function getViews(username: any) {
         try {
+            //3002
             const views = (await axios.get(config.baseurl + ":" + config.views + "/api/v1/views/users/" + username)).data
             if(views.error){
                 return {status: false, error: views.error};

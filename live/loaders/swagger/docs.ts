@@ -10,10 +10,10 @@ const swaggerOptions = {
         contact: {
           name: "Luca Martinelli"
         },
-        servers: ["http://localhost:3335"]
+        servers: ["http://localhost:3004"]
       }
     },
-    apis: ['./routes/v1/mqtt/routes.ts']
+    apis: ['./loaders/express/index.ts','./routes/v1/mqtt/routes.ts']
   };
   
   const swaggerDocs = swaggerJsDoc(swaggerOptions);

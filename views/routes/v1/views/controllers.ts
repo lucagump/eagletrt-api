@@ -15,7 +15,7 @@ export module RouteController {
         try {
             if(req.params.username !== null) {
                 var data = await viewController.getUsersViews(req.params.username);
-                if (data.data === []){
+                if (data.data.length == 0){
                     return res.status(404).json(data)
                 }
                 res.status(200).json(data);

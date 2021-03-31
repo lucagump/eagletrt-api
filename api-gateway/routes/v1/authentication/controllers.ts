@@ -9,6 +9,7 @@ export module RouteController {
             const user = AuthModel.validateLogin(req.body);
             if (user.value) {
                 var userData = await authController.login(user);
+                // console.log(userData)
                 if (userData.status == true && userData.password == true) {
                     jwtController.addToken(res, { username: user.value.username, password: user.value.password }, userData.id);
                     

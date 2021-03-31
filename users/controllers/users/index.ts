@@ -160,8 +160,8 @@ export class UserController {
         if(base !== undefined){
             try {
                 var userToInsert = await this.getUserByUsername(user.value.username);
-
-                if(Array.isArray(userToInsert)) {
+                
+                if(Array.isArray(userToInsert) && userToInsert.length != 0) {
                     return {error: "User already registered"}
                 }
 

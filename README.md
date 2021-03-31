@@ -9,9 +9,7 @@ This project consists of an [express](https://expressjs.com/) rest API server wr
 It's a cloud-based application. It's built with different microservices developed with Node Js, Docker, NGINX, MongoDB and MQTT. The project is up and running (_i hope_) [here](https://theuselessweb.com/).
 
 ## Goal
-
-This application is the result of the continuos research of the telemtry group from 2018 untill 2021. The result is a maintainable application to serve the telemtry web-app used byt the member of the team.
-The main focus is to serve the webapp by giving the data to render the charts of the vehicle during the tests. Each user should have the possiblity to see a customizable page with charts and configuration of the vehicle. Further user stories could be implemented starting from this _zero_ version of the software.
+This application is the result of the continuous research of the telemetry group from 2018 until 2021. The result is a maintainable application to serve the telemetry web-app used by the member of the team. The main focus is to serve the web app by giving the data to render the charts of the vehicle during the tests. Each user should have the possibility to see a customizable page with charts and configuration of the vehicle. Further user stories could be implemented starting from this _zero_ version of the software.
 
 ## Project Structure (Version 1)
 
@@ -36,7 +34,7 @@ The main focus is to serve the webapp by giving the data to render the charts of
 
 ## Webapp Mockup
 
-The webapp mockup is designed according to the feedback gathered via a questionnaire in 2019. 
+The web app mockup is designed according to the feedback gathered via a questionnaire in 2019. 
 Other interactions are required to validate the usability and the complete set of functionalities needed for tests and race events.
 
 ### Login
@@ -51,11 +49,11 @@ Other interactions are required to validate the usability and the complete set o
 
 ![SchemaOverview](webapp/Telemetry.png)
 
-## MicroServices
+## Microservices
 ![SchemaOverview](documents/template.jpg)
 
 The template used to build the microservice architecture is described above. 
-It consists of four main folder:  
+It consists of five main folder:  
 * **loaders**: to inject dependencies, routes and all sort of configuration. 
 * **routes**: where the route of the API are described with the swagger code. It also has a _controller.ts_ to handle requests.
 * **controllers**: it's where the magic is, all the sauce of the project. This folder contains all the functions used to retrieve data from the  database or to interact with external API.
@@ -72,26 +70,30 @@ As reverse proxy it sits in front of our microservices and API Gateway. When a b
 
 The API Gateway is responsible for request routing, composition, and protocol translation. All requests from clients first go through the API Gateway. It then routes requests to the
 appropriate microservice. The API Gateway will often handle a request by invoking multiple microservices and aggregating the results. 
+The api-docs is also available [here](https://documenter.getpostman.com/view/3504740/TzCMe8qu).
+
 
 ### History
 ![SchemaOverview](documents/charts-history.png)
 
 The History microservice is used to serve the web-app with all the documents, data of the vehicle. This microservice consists of and adapter layer to get the information from a schema-less database (MongoDB on Atlas and inside the University of Trento)
+The api-docs is also available [here](https://documenter.getpostman.com/view/3504740/TzCMe8gw)
 
 ### Users
 ![SchemaOverview](documents/charts-users.png)
 
 The Airtable microservice is used to serve the web-app with all the information about the user and their personalized views based on their role. This microservice consists of and adapter layer to get the information from a Airtable.
+The api-docs is also available [here](https://documenter.getpostman.com/view/3504740/TzCMe8cb).
 
 ### Views
 ![SchemaOverview](documents/charts-views.png)
 
-The Views microservice is used to serve the web-app with all the information about the personalized views based on the user role. This microservice consists of and adapter layer to get the information from a Airtable.
+The Views microservice is used to serve the web-app with all the information about the personalized views based on the user role. This microservice consists of and adapter layer to get the information from a Airtable. The api-docs is also available [here](https://documenter.getpostman.com/view/3504740/TzCMe8YD).
 
 ### Live
 ![SchemaOverview](documents/charts-mqtt.png)
 
-The Live microservice is used to insert the documents/data sent from the vehicle. This microservice consists of proxy for the messages receive on the vehicle _topic_. The broker is _broker.mqttdashboard.com_.
+The Live microservice is used to insert the documents/data sent from the vehicle. This microservice consists of proxy for the messages receive on the vehicle _topic_. The broker is _broker.mqttdashboard.com_. The api-docs is also available [here](https://documenter.getpostman.com/view/3504740/TzCMe8cY).
 
 ### MQTT Publisher
 ![SchemaOverview](documents/charts-mqtt.png)
@@ -117,7 +119,7 @@ DB_HOSTNAME=<insert-your-connection-string>
 
 In the root folder run:
 
-`docker`
+`docker-compose`
 ```
 npm start
 ```
@@ -132,6 +134,14 @@ Eache microservices have several npm scripts, the description is below:
 * `npm commit:sign` - Signed commit with commitizen
 * `npm test` - Transpile the application and run all the tests
 
+### Docker
+To run each microservice alone for development purpose build and run the image as described below
+
+`docker`
+```
+docker build -t 'microservice-name' .
+docker run 'microservice-name'
+```
 
 ## Documentation and API Documentation  
 

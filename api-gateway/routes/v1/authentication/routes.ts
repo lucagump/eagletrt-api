@@ -23,8 +23,8 @@ export default function (): express.Router {
     /**
      * @swagger
      * /api/v1/login:
-     *  get:
-     *    description: This endpoint returns an array with the test-run collections on the database
+     *  post:
+     *    description: This endpoint is used to login 
      *  responses:
      *      '200':
      *        description: A successful response
@@ -34,63 +34,13 @@ export default function (): express.Router {
     /**
      * @swagger
      * /api/v1/signup:
-     *  get:
-     *    description: This endpoint returns an array with the test-run collections on the database
+     *  post:
+     *    description: This endpoint is used to signup as a new user
      *  responses:
      *      '200':
      *        description: A successful response
      */
-    router.post('/signup', RouteController.signup);
-
-    router.get('/airtable', function(req, res, next) {
-    //   request(`${airtableUrl}/products`).pipe(res);
-        request(`http://google.com`).pipe(res);
-    });
-        
-    // router.get('/api/protected', checkToken, function(req, res) {
-    //     jwt.verify(req.token, jwtSigningKey, function (err: any,data: any) {
-    //         if (err) {
-    //             res.sendStatus(403);
-    //         } else {
-    //             res.json({
-    //                 text: 'api is protected',
-    //                 data: data
-    //             });
-    //         }
-    //     })
-    // });
-        
-    // function checkToken(req: Request, res: Response, next: any){
-    //     const bearerHeader = req.headers['authorization'];
-    //     console.log(req.headers);
-    //     if (typeof bearerHeader !== 'undefined'){
-    //         const bearer = bearerHeader.split(" ");
-    //         console.log(bearer[0])
-    //         console.log(bearer[1])
-    //         const bearerToken = bearer[1];
-    //         req.token = bearerToken;
-    //         next();
-    //     } else {
-    //         console.log(bearerHeader)
-    //         res.status(403).json({message: 'gas'});
-    //     }
-    // }
-    
-    // // Another example with getGatewayBearerToken
-    // router.get('/products', function(req, res, next) {
-    //     const bearerToken = getGatewayBearerToken(req);
-    //     const options = {
-    //         url: `${productUrl}/products`,
-    //         headers: { authorization: bearerToken }
-    //     };
-    //     request(options).pipe(res);
-    // });
-        
-        
-    // As a middleware
-    // import authMiddleware from './common'
-    // router.use(authMiddleware({ jwtSigningKey: jwtSigningKey, loginRedirectUrl: loginRedirectUrl }));
-        
+    router.post('/signup', RouteController.signup);  
     
     return router;
 

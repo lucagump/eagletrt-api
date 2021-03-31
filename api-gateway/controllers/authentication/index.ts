@@ -7,12 +7,16 @@ export module AuthController {
     // Login user by checking the password
     export async function login(user: any) {
         try {
-            const userToCheck = (await axios.get(config.baseurl + ":3001" + "/api/v1/users/username/" + user.value.username)).data
-            if(userToCheck.error){
+            // 3001
+            const userToCheck = (await axios.get(config.baseurl + ":"  + config.users + "/api/v1/users/username/" + user.value.username)).data
+            if(!Array.isArray(userToCheck) && userToCheck.error){
                 return {status: false, error: userToCheck.error};
             }  
-            return {status:true, password: checkPassword(user.value.password, userToCheck.password), id: userToCheck.id}
+            var compare = await bcrypt.compare(user.value.password as string, userToCheck[0].password as string);
+
+            return {status:true, password: compare, id: userToCheck[0].id}
         } catch (error) {
+            console.log(error)
             return {error :"Internal error"}
         }          
     };
@@ -21,7 +25,7 @@ export module AuthController {
     // Signup user by checking if the user exist
     export async function signup(user: any) {
         try {
-            const userToCheck = (await axios.post(config.baseurl + ":3001" + "/api/v1/users",{
+            const userToCheck = (await axios.post(config.baseurl + ":"  + config.users + "/api/v1/users",{
                 "name": user.value.name,
                 "surname": user.value.surname,
                 "username": user.value.username,

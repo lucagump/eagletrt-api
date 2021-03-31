@@ -2,7 +2,7 @@ import express from 'express'
 import { Loader } from './loaders';
 import Logger from './loaders/logger';
 
-function normalizePort(val: string | number | undefined, fallback = 3335): number {
+function normalizePort(val: string | number | undefined, fallback = 3004): number {
     if (typeof val === 'string') {
         const port = parseInt(val, 10);
         if (!isNaN(port) && port > 0)

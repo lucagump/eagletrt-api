@@ -9,7 +9,7 @@
   "scripts": {
     "transpile": "tsc",
     "start:build": "tsc -w",
-    "start:run": "nodemon dist/app.js",
+    "start:run": "nodemon dist/index.js",
     "script": "./start.sh",
     "start": "concurrently npm:start:*",
     "commit": "git-cz",
