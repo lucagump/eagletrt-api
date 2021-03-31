@@ -1,6 +1,6 @@
-<mxfile host="app.diagrams.net" modified="2021-03-31T23:39:28.139Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.105 Safari/537.36" etag="XF-Bg3abddd-vu9730VE" version="14.5.4" type="github" pages="6">
+<mxfile host="app.diagrams.net" modified="2021-03-31T23:47:51.692Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.105 Safari/537.36" etag="fcbjJBTDSQW13-wWKXoZ" version="14.5.4" type="github" pages="7">
   <diagram id="OLrGYEf47lAQ2E7xzSmT" name="Page-1">
-    <mxGraphModel dx="3931" dy="3292" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+    <mxGraphModel dx="2498" dy="3292" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -1126,6 +1126,32 @@
         </mxCell>
         <mxCell id="MbAVIga0BYJiwNTAT0Qd-21" value="" style="shape=image;verticalLabelPosition=bottom;labelBackgroundColor=#ffffff;verticalAlign=top;aspect=fixed;imageAspect=0;image=https://www.penninkhof.com/wp-content/uploads/2015/03/MQTT.png;" parent="MbAVIga0BYJiwNTAT0Qd-1" vertex="1">
           <mxGeometry x="3175.25" y="-1945.8600000000001" width="150" height="84.23" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="nW62hrnHghSmuhloS2xG" name="api-gateway">
+    <mxGraphModel dx="5604" dy="5912" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="6WPtnk6EqOZfmUcK9Y_5-0" />
+        <mxCell id="6WPtnk6EqOZfmUcK9Y_5-1" parent="6WPtnk6EqOZfmUcK9Y_5-0" />
+        <mxCell id="6WPtnk6EqOZfmUcK9Y_5-2" value="" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="6WPtnk6EqOZfmUcK9Y_5-1">
+          <mxGeometry x="50" y="-2166.5" width="240" height="306.5" as="geometry" />
+        </mxCell>
+        <mxCell id="6WPtnk6EqOZfmUcK9Y_5-3" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;" vertex="1" parent="6WPtnk6EqOZfmUcK9Y_5-1">
+          <mxGeometry x="80" y="-2170" width="130.5" height="55.5" as="geometry" />
+        </mxCell>
+        <mxCell id="6WPtnk6EqOZfmUcK9Y_5-4" value="API Gateway" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="6WPtnk6EqOZfmUcK9Y_5-1">
+          <mxGeometry x="107.69000000000005" y="-2153.44" width="44.75" height="22.38" as="geometry" />
+        </mxCell>
+        <mxCell id="6WPtnk6EqOZfmUcK9Y_5-5" value="" style="aspect=fixed;html=1;points=[];align=center;image;fontSize=12;image=img/lib/mscae/Docker.svg;" vertex="1" parent="6WPtnk6EqOZfmUcK9Y_5-1">
+          <mxGeometry x="171.32999999999993" y="-2152.75" width="25.61" height="21" as="geometry" />
+        </mxCell>
+        <mxCell id="6WPtnk6EqOZfmUcK9Y_5-6" value="&lt;div style=&quot;text-align: justify&quot;&gt;&lt;ul&gt;&lt;li&gt;&lt;span&gt;POST api/v1/login&lt;/span&gt;&lt;/li&gt;&lt;li&gt;&lt;span&gt;POST api/v1/signup&lt;/span&gt;&lt;/li&gt;&lt;li&gt;&lt;span&gt;GET api/v1/documentation/:doc&lt;/span&gt;&lt;/li&gt;&lt;li&gt;GET api/v1/views/:username&lt;/li&gt;&lt;/ul&gt;&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;align=left;" vertex="1" parent="6WPtnk6EqOZfmUcK9Y_5-1">
+          <mxGeometry x="50" y="-2062" width="220" height="172" as="geometry" />
+        </mxCell>
+        <mxCell id="6WPtnk6EqOZfmUcK9Y_5-7" value="Router" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="6WPtnk6EqOZfmUcK9Y_5-1">
+          <mxGeometry x="50" y="-2080.5" width="120" height="60" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
