@@ -6,7 +6,7 @@
 ## Technologies
 
 This project consists of an [express](https://expressjs.com/) rest API server written in Typescript.
-It's a cloud-based application. It's built with different microservices developed with Node Js, Docker, NGINX, MongoDB and MQTT. The project is up and running (_i hope_) [here](https://theuselessweb.com/).
+It's a cloud-based application. It's built with different microservices developed with Node Js, Docker, NGINX, MongoDB and MQTT. 
 
 ## Goal
 This application is the result of the continuous research of the telemetry group from 2018 until 2021. The result is a maintainable application to serve the telemetry web-app used by the member of the team. The main focus is to serve the web app by giving the data to render the charts of the vehicle during the tests. Each user should have the possibility to see a customizable page with charts and configuration of the vehicle. Further user stories could be implemented starting from this _zero_ version of the software.
@@ -18,19 +18,11 @@ This application is the result of the continuous research of the telemetry group
 ### Todo 
 
 + [ ] Fix port from config
-+ [X] Auth Middleware History
-+ [X] Views in api-gateway
-+ [X] Authentication
 + [ ] MongoDB Paging [Guide] (https://scalegrid.io/blog/fast-paging-with-mongodb/)
-+ [X] Joi Airtable
 + [ ] Typedoc
-+ [X] Mockup web-app
 + [ ] Swagger to NGINX Configuration [Script] (https://gist.github.com/nginx-gists/37ce65292a06219ff8d35d293c05e0b5#file-oas2nginx-sh)
-+ [X] New Tests
-+ [ ] Check NGINX configuration 
+
 + [ ] Heroku CI
-+ [X] Dockerfile
-+ [X] docker-compsoe.yml
 
 ## Webapp Mockup
 
@@ -148,8 +140,6 @@ docker run 'microservice-name'
 The complete generated document of the API is available [here](https://documenter.getpostman.com/view/3504740/TVCjx5xT#33c906b0-350f-4e19-a0e6-09d6a9aab648). It's possible to check the documentation of each microservices on the route _/api-docs_ 
 
 ## Report
-
-![SchemaExample](documents/to-do.png)
 
 The [report ](https://github.com/lucagump/eagletrt-api/blob/main/documents/report.pdf) is in the /documents folder  
 
