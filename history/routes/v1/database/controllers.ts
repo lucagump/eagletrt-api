@@ -1,11 +1,14 @@
 import { Request, Response } from 'express';
+import { serialize } from 'node:v8';
 import { historyController } from '../../../controllers';
    
 export module RouteController {
     
     export async function getCollections(req: Request, res: Response) {
         try {
-            var data = await historyController.getCollections();
+            var data = await historyController.getCollections(req.params.size, req.params.index);
+            // you could still call getCollections() without any arguments.
+            // the undefined and type check is in the controller.
             res.json({'collections': data});
         } catch (error) {
             res.json({"error": error});

@@ -6,7 +6,7 @@ import config from '../../config'
 export class DocumentController {
 
     // Get the collection
-    public async getCollections() {
+    public async getCollections(pageSize: any = undefined, pageIndex : any = undefined) {
 
         const client = await MongoClient.connect(config.databaseUrl as string, config.databaseConfig)
             .catch(err => { console.log(err); });
@@ -20,6 +20,14 @@ export class DocumentController {
             const db = client.db(config.databaseNameTest as string);
             var data = await db.listCollections().toArray();
             var response: any  = []
+            // Late paging, probably faster, but needs the whole collection loaded. sorry luca
+            if (pageSize != undefined) {
+                if (!Number.isInteger(pageSize) || !Number.isInteger(pageIndex)) throw new Error();
+                if (pageSize < 0 || pageIndex < 0) throw new Error();
+                var upper: number = Math.min(data.length-1, (pageIndex+1) * pageSize);
+                var lower: number = Math.min(data.length-1, pageIndex * pageSize);
+                data = data.slice(lower, upper);
+            }
             data.forEach(element => {
                 response.push(element.name)
             });
