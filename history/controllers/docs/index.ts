@@ -6,7 +6,7 @@ import config from '../../config'
 export class DocumentController {
 
     // Get the collection
-    public async getCollections(pageSize: any = undefined, pageIndex : any = undefined) {
+    public async getCollections() {
 
         const client = await MongoClient.connect(config.databaseUrl as string, config.databaseConfig)
             .catch(err => { console.log(err); });
@@ -20,14 +20,6 @@ export class DocumentController {
             const db = client.db(config.databaseNameTest as string);
             var data = await db.listCollections().toArray();
             var response: any  = []
-            // Late paging, probably faster, but needs the whole collection loaded. sorry luca
-            if (pageSize != undefined) {
-                if (!Number.isInteger(pageSize) || !Number.isInteger(pageIndex)) throw new Error();
-                if (pageSize < 0 || pageIndex < 0) throw new Error();
-                var upper: number = Math.min(data.length-1, (pageIndex+1) * pageSize);
-                var lower: number = Math.min(data.length-1, pageIndex * pageSize);
-                data = data.slice(lower, upper);
-            }
             data.forEach(element => {
                 response.push(element.name)
             });
@@ -73,7 +65,7 @@ export class DocumentController {
     };
 
     // Get session documents
-    public async getSessionDocuments(collectionName: string,session: string) {
+    public async getSessionDocuments(collectionName: string,session: string, pageSize: any = undefined, pageIndex : any = undefined) {
 
         const client = await MongoClient.connect(config.databaseUrl as string, config.databaseConfig)
             .catch(err => { console.log(err); });
@@ -91,8 +83,13 @@ export class DocumentController {
                 'sessionName': session,
                 'id': { $ne : undefined}
             };
-            var data = await collection.find(query).sort({timestamp:1}).toArray();
-
+            var data = [];
+            if (pageSize != undefined) {
+                if (!Number.isInteger(pageSize) || !Number.isInteger(pageIndex)) throw new Error();
+                if (pageSize < 0 || pageIndex < 0) throw new Error();
+                data = await collection.find(query).sort({timestamp:1}).skip(pageIndex*pageSize).limit(pageSize).toArray();
+            } else
+                data = await collection.find(query).sort({timestamp:1}).toArray();
             return data
         } catch (error) {
             return {"error":"Database query error"}

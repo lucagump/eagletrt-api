@@ -6,9 +6,7 @@ export module RouteController {
     
     export async function getCollections(req: Request, res: Response) {
         try {
-            var data = await historyController.getCollections(req.params.size, req.params.index);
-            // you could still call getCollections() without any arguments.
-            // the undefined and type check is in the controller.
+            var data = await historyController.getCollections();
             res.json({'collections': data});
         } catch (error) {
             res.json({"error": error});
@@ -35,7 +33,7 @@ export module RouteController {
                 var collection = req.params.collection
                 var session = req.params.session
 
-                var data = await historyController.getSessionDocuments(collection,session);
+                var data = await historyController.getSessionDocuments(collection,session,req.body.pageSize,req.body.pageIndex);
                 res.json({'sessions': data});
             } else {
                 res.status(400).json({'error': 'invalid req'})

@@ -1,7 +1,8 @@
 {
 	"info": {
-		"_postman_id": "426e7401-a9f5-4496-8bec-039aa1d78166",
-		"name": "eagletrt-api/history",
+		"_postman_id": "0b7436b0-feb5-4546-bd37-152bde0bf8da",
+		"name": "eagletrt-api/api-gateway",
+		"description": "The API Gateway is responsible for request routing, composition, and protocol translation. All requests from clients first go through the API Gateway. It then routes requests to the\nappropriate microservice. The API Gateway will often handle a request by invoking multiple microservices and aggregating the results.",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
@@ -15,7 +16,16 @@
 							"pm.test(\"Status code is 200\", function () {\r",
 							"    pm.response.to.have.status(200);\r",
 							"});\r",
-							""
+							"\r",
+							"let jsonData = pm.response.json();\r",
+							"\r",
+							"pm.test(\"GET Request\", function (){\r",
+							"    pm.response.to.have.status(200);\r",
+							"})\r",
+							"\r",
+							"pm.test(\"JSON Data Response\", function (){\r",
+							"    pm.expect(jsonData)\r",
+							"})"
 						],
 						"type": "text/javascript"
 					}
@@ -25,18 +35,73 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:3003/status",
+					"raw": "http://localhost:3000/status",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "3003",
+					"port": "3000",
 					"path": [
 						"status"
 					]
-				}
+				},
+				"description": "Return the status of the service"
 			},
-			"response": []
+			"response": [
+				{
+					"name": "status",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/status",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"status"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "15"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"f-v/Y1JusChTxrQUzPtNAKycooOTA\""
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 31 Mar 2021 17:26:12 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": \"OK\"\n}"
+				}
+			]
 		},
 		{
 			"name": "docs api",
@@ -58,22 +123,81 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:3003/api-docs/",
+					"raw": "http://localhost:3000/api-docs/",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "3003",
+					"port": "3000",
 					"path": [
 						"api-docs",
 						""
 					]
 				}
 			},
-			"response": []
+			"response": [
+				{
+					"name": "docs api",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api-docs/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api-docs",
+								""
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "html",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Type",
+							"value": "text/html; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "3104"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"c20-YaHADSLwvE3kEdwr5u3Bfu2fhF8\""
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 31 Mar 2021 17:26:22 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "\n<!-- HTML for static distribution bundle build -->\n<!DOCTYPE html>\n<html lang=\"en\">\n    <head>\n        <meta charset=\"UTF-8\">\n        <title>Swagger UI</title>\n        <link rel=\"stylesheet\" type=\"text/css\" href=\"./swagger-ui.css\" >\n        <link rel=\"icon\" type=\"image/png\" href=\"./favicon-32x32.png\" sizes=\"32x32\" />\n        <link rel=\"icon\" type=\"image/png\" href=\"./favicon-16x16.png\" sizes=\"16x16\" />\n        <style>\n    html\n    {\n      box-sizing: border-box;\n      overflow: -moz-scrollbars-vertical;\n      overflow-y: scroll;\n    }\n    *,\n    *:before,\n    *:after\n    {\n      box-sizing: inherit;\n    }\n\n    body {\n      margin:0;\n      background: #fafafa;\n    }\n  </style>\n    </head>\n    <body>\n        <svg xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" style=\"position:absolute;width:0;height:0\">\n            <defs>\n                <symbol viewBox=\"0 0 20 20\" id=\"unlocked\">\n                    <path d=\"M15.8 8H14V5.6C14 2.703 12.665 1 10 1 7.334 1 6 2.703 6 5.6V6h2v-.801C8 3.754 8.797 3 10 3c1.203 0 2 .754 2 2.199V8H4c-.553 0-1 .646-1 1.199V17c0 .549.428 1.139.951 1.307l1.197.387C5.672 18.861 6.55 19 7.1 19h5.8c.549 0 1.428-.139 1.951-.307l1.196-.387c.524-.167.953-.757.953-1.306V9.199C17 8.646 16.352 8 15.8 8z\"></path>\n                </symbol>\n                <symbol viewBox=\"0 0 20 20\" id=\"locked\">\n                    <path d=\"M15.8 8H14V5.6C14 2.703 12.665 1 10 1 7.334 1 6 2.703 6 5.6V8H4c-.553 0-1 .646-1 1.199V17c0 .549.428 1.139.951 1.307l1.197.387C5.672 18.861 6.55 19 7.1 19h5.8c.549 0 1.428-.139 1.951-.307l1.196-.387c.524-.167.953-.757.953-1.306V9.199C17 8.646 16.352 8 15.8 8zM12 8H8V5.199C8 3.754 8.797 3 10 3c1.203 0 2 .754 2 2.199V8z\"/>\n                </symbol>\n                <symbol viewBox=\"0 0 20 20\" id=\"close\">\n                    <path d=\"M14.348 14.849c-.469.469-1.229.469-1.697 0L10 11.819l-2.651 3.029c-.469.469-1.229.469-1.697 0-.469-.469-.469-1.229 0-1.697l2.758-3.15-2.759-3.152c-.469-.469-.469-1.228 0-1.697.469-.469 1.228-.469 1.697 0L10 8.183l2.651-3.031c.469-.469 1.228-.469 1.697 0 .469.469.469 1.229 0 1.697l-2.758 3.152 2.758 3.15c.469.469.469 1.229 0 1.698z\"/>\n                </symbol>\n                <symbol viewBox=\"0 0 20 20\" id=\"large-arrow\">\n                    <path d=\"M13.25 10L6.109 2.58c-.268-.27-.268-.707 0-.979.268-.27.701-.27.969 0l7.83 7.908c.268.271.268.709 0 .979l-7.83 7.908c-.268.271-.701.27-.969 0-.268-.269-.268-.707 0-.979L13.25 10z\"/>\n                </symbol>\n                <symbol viewBox=\"0 0 20 20\" id=\"large-arrow-down\">\n                    <path d=\"M17.418 6.109c.272-.268.709-.268.979 0s.271.701 0 .969l-7.908 7.83c-.27.268-.707.268-.979 0l-7.908-7.83c-.27-.268-.27-.701 0-.969.271-.268.709-.268.979 0L10 13.25l7.418-7.141z\"/>\n                </symbol>\n                <symbol viewBox=\"0 0 24 24\" id=\"jump-to\">\n                    <path d=\"M19 7v4H5.83l3.58-3.59L8 6l-6 6 6 6 1.41-1.41L5.83 13H21V7z\"/>\n                </symbol>\n                <symbol viewBox=\"0 0 24 24\" id=\"expand\">\n                    <path d=\"M10 18h4v-2h-4v2zM3 6v2h18V6H3zm3 7h12v-2H6v2z\"/>\n                </symbol>\n            </defs>\n        </svg>\n        <div id=\"swagger-ui\"></div>\n        <script src=\"./swagger-ui-bundle.js\"> </script>\n        <script src=\"./swagger-ui-standalone-preset.js\"> </script>\n        <script src=\"./swagger-ui-init.js\"> </script>\n        <style>\n  .swagger-ui .topbar .download-url-wrapper { display: none } undefined\n</style>\n    </body>\n</html>"
+				}
+			]
 		},
 		{
-			"name": "testrun collections",
+			"name": "documentation/:microservice",
 			"event": [
 				{
 					"listen": "test",
@@ -82,42 +206,50 @@
 							"pm.test(\"Status code is 200\", function () {\r",
 							"    pm.response.to.have.status(200);\r",
 							"});\r",
-							"\r",
-							"let jsonData = pm.response.json();\r",
-							"\r",
-							"pm.test(\"GET Request\", function (){\r",
-							"    pm.response.to.have.status(200);\r",
-							"})\r",
-							"\r",
-							"pm.test(\"JSON Data Response\", function (){\r",
-							"    pm.expect(jsonData)\r",
-							"})"
+							""
 						],
 						"type": "text/javascript"
 					}
 				}
 			],
 			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Imx1Y2FndW1wIiwicGFzc3dvcmQiOiJlYWdsZVRSVCIsImlhdCI6MTYxNjUxNjc1NX0.miIRcMzApEAokRLEgByIZDrn-x5PVbGVCwZtWFyYYz8",
+							"type": "string"
+						}
+					]
+				},
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:3003/api/v1/collections",
+					"raw": "http://localhost:3000/api/v1/documentation/:microservice",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "3003",
+					"port": "3000",
 					"path": [
 						"api",
 						"v1",
-						"collections"
+						"documentation",
+						":microservice"
+					],
+					"variable": [
+						{
+							"key": "microservice",
+							"value": "users"
+						}
 					]
 				}
 			},
 			"response": []
 		},
 		{
-			"name": "testrun sessions",
+			"name": "login",
 			"event": [
 				{
 					"listen": "test",
@@ -141,15 +273,12 @@
 					}
 				}
 			],
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
 			"request": {
-				"method": "GET",
+				"method": "POST",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"timestamp\":[1582483097140]\r\n}",
+					"raw": "{\r\n    \"username\": \"12bolliccissas\",\r\n    \"password\": \"123trueORfalseOrNegative\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -157,31 +286,96 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:3003/api/v1/collections/:collection/sessions",
+					"raw": "http://localhost:3000/api/v1/login",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "3003",
+					"port": "3000",
 					"path": [
 						"api",
 						"v1",
-						"collections",
-						":collection",
-						"sessions"
-					],
-					"variable": [
-						{
-							"key": "collection",
-							"value": "schio"
-						}
+						"login"
 					]
 				}
 			},
-			"response": []
+			"response": [
+				{
+					"name": "login",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"12bolliccissas\",\r\n    \"password\": \"123trueORfalseOrNegative\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/v1/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"login"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Authentication",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IjEyYm9sbGljY2lzc2FzIiwicGFzc3dvcmQiOiIxMjN0cnVlT1JmYWxzZU9yTmVnYXRpdmUiLCJpYXQiOjE2MTcyMTM4Mzh9.Ofty0ANe68t2UR8gzzIvBT0lM22ZL-a8RIpkaLg9nX8"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "233"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"e9-mNFhLiqZKY4UqqeUhPhu6TPTxR4\""
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 31 Mar 2021 18:03:58 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"username\": \"12bolliccissas\",\n    \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IjEyYm9sbGljY2lzc2FzIiwicGFzc3dvcmQiOiIxMjN0cnVlT1JmYWxzZU9yTmVnYXRpdmUiLCJpYXQiOjE2MTcyMTM4Mzh9.Ofty0ANe68t2UR8gzzIvBT0lM22ZL-a8RIpkaLg9nX8\"\n}"
+				}
+			]
 		},
 		{
-			"name": "session documents",
+			"name": "signup",
 			"event": [
 				{
 					"listen": "test",
@@ -205,15 +399,12 @@
 					}
 				}
 			],
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
 			"request": {
-				"method": "GET",
+				"method": "POST",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"timestamp\":[1582483097140]\r\n}",
+					"raw": "{\r\n    \"name\": \"Thomas\",\r\n    \"surname\": \"Turbato\",\r\n    \"username\": \"eagleTRT\",\r\n    \"password\": \"eagleTRT\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -221,36 +412,96 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:3003/api/v1/collections/:collection/sessions/:session",
+					"raw": "http://localhost:3000/api/v1/signup",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "3003",
+					"port": "3000",
 					"path": [
 						"api",
 						"v1",
-						"collections",
-						":collection",
-						"sessions",
-						":session"
-					],
-					"variable": [
-						{
-							"key": "collection",
-							"value": "schio"
-						},
-						{
-							"key": "session",
-							"value": "20201215_174858_Mirco_Acceleration_v0.0.0"
-						}
+						"signup"
 					]
 				}
 			},
-			"response": []
+			"response": [
+				{
+					"name": "signup",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Thomas\",\r\n    \"surname\": \"Turbato\",\r\n    \"username\": \"eagleTRT\",\r\n    \"password\": \"eagleTRT\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/v1/signup",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"signup"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Authentication",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImVhZ2xlVFJUIiwicGFzc3dvcmQiOiJlYWdsZVRSVCIsImlhdCI6MTYxNzIxMzg1OX0.fpYuQRbVlS__nRp_dRf64KBS9n-l83xOg7b3RI-jMDU"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "198"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"c6-lJXAoSHUyc2kaJZNb7gLLFdTAmI\""
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 31 Mar 2021 18:04:20 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"username\": \"eagleTRT\",\n    \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImVhZ2xlVFJUIiwicGFzc3dvcmQiOiJlYWdsZVRSVCIsImlhdCI6MTYxNzIxMzg1OX0.fpYuQRbVlS__nRp_dRf64KBS9n-l83xOg7b3RI-jMDU\"\n}"
+				}
+			]
 		},
 		{
-			"name": "session min max timestamp",
+			"name": "views",
 			"event": [
 				{
 					"listen": "test",
@@ -274,223 +525,108 @@
 					}
 				}
 			],
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
 			"request": {
-				"method": "GET",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"timestamp\":[1582483097140]\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Imx1Y2FndW1wIiwicGFzc3dvcmQiOiJlYWdsZVRSVCIsImlhdCI6MTYxNjUxNjc1NX0.miIRcMzApEAokRLEgByIZDrn-x5PVbGVCwZtWFyYYz8",
+							"type": "string"
 						}
-					}
+					]
 				},
-				"url": {
-					"raw": "http://localhost:3003/api/v1/collections/:collection/sessions/:session/minmax",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "3003",
-					"path": [
-						"api",
-						"v1",
-						"collections",
-						":collection",
-						"sessions",
-						":session",
-						"minmax"
-					],
-					"variable": [
-						{
-							"key": "collection",
-							"value": "schio"
-						},
-						{
-							"key": "session",
-							"value": "20201215_183218_Mirco_Skidpad_v0.0.0"
-						}
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "data by timestamp",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"exec": [
-							"pm.test(\"Status code is 200\", function () {\r",
-							"    pm.response.to.have.status(200);\r",
-							"});\r",
-							"\r",
-							"let jsonData = pm.response.json();\r",
-							"\r",
-							"pm.test(\"GET Request\", function (){\r",
-							"    pm.response.to.have.status(200);\r",
-							"    // pm.expect(jsonData.args.isGood).to.eql('true');\r",
-							"    // pm.expect(jsonData.args.isBad).to.eql('false');\r",
-							"})"
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:3003/api/v1/data/:collection/:timestamp",
+					"raw": "http://localhost:3000/api/v1/views/:username",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "3003",
+					"port": "3000",
 					"path": [
 						"api",
 						"v1",
-						"data",
-						":collection",
-						":timestamp"
+						"views",
+						":username"
 					],
 					"variable": [
 						{
-							"key": "collection",
-							"value": "nicola-autocross"
-						},
-						{
-							"key": "timestamp",
-							"value": "1582483095032"
+							"key": "username",
+							"value": "lucagump"
 						}
 					]
 				}
 			},
-			"response": []
-		},
-		{
-			"name": "documents by id",
-			"event": [
+			"response": [
 				{
-					"listen": "test",
-					"script": {
-						"exec": [
-							"pm.test(\"Status code is 200\", function () {\r",
-							"    pm.response.to.have.status(200);\r",
-							"});\r",
-							"\r",
-							"let jsonData = pm.response.json();\r",
-							"\r",
-							"pm.test(\"GET Request\", function (){\r",
-							"    pm.response.to.have.status(200);\r",
-							"    // pm.expect(jsonData.args.isBad).to.eql('false');\r",
-							"})"
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "http://localhost:3003/api/v1/documents/:collection/:id",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "3003",
-					"path": [
-						"api",
-						"v1",
-						"documents",
-						":collection",
-						":id"
-					],
-					"variable": [
-						{
-							"key": "collection",
-							"value": "nicola-autocross"
-						},
-						{
-							"key": "id",
-							"value": "2"
+					"name": "views",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/v1/views/:username",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"views",
+								":username"
+							],
+							"variable": [
+								{
+									"key": "username",
+									"value": "lucagump"
+								}
+							]
 						}
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "from timestamp start to finish",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"exec": [
-							"pm.test(\"Status code is 200\", function () {\r",
-							"    pm.response.to.have.status(200);\r",
-							"});\r",
-							"\r",
-							"let jsonData = pm.response.json();\r",
-							"\r",
-							"pm.test(\"GET Request\", function (){\r",
-							"    pm.response.to.have.status(200);\r",
-							"})\r",
-							"\r",
-							"pm.test(\"JSON Data Response\", function (){\r",
-							"    pm.expect(jsonData)\r",
-							"})"
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "http://localhost:3003/api/v1/data/:collection/:session/:start/:finish",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "3003",
-					"path": [
-						"api",
-						"v1",
-						"data",
-						":collection",
-						":session",
-						":start",
-						":finish"
-					],
-					"variable": [
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
 						{
-							"key": "collection",
-							"value": "schio"
+							"key": "X-Powered-By",
+							"value": "Express"
 						},
 						{
-							"key": "session",
-							"value": "20201215_174858_Mirco_Acceleration_v0.0.0"
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
 						},
 						{
-							"key": "start",
-							"value": "1608054538900"
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
 						},
 						{
-							"key": "finish",
-							"value": "1608054540400"
+							"key": "Content-Length",
+							"value": "87"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"57-v4Fmx+8BSHl1JjJhagYFvQS951w\""
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 31 Mar 2021 18:09:00 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
 						}
-					]
+					],
+					"cookie": [],
+					"body": "{\n    \"views\": {\n        \"status\": true,\n        \"username\": \"lucagump\",\n        \"views\": [\n            \"Telemetria\",\n            \"Volante\",\n            \"Test\"\n        ]\n    }\n}"
 				}
-			},
-			"response": []
+			]
 		}
 	]
 }
