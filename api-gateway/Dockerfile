@@ -6,7 +6,8 @@ COPY . .
 
 FROM base as dev
 
-ENV NODE_ENV=development
+ARG MODE
+ENV NODE_ENV=$MODE
 RUN npm install
 
 RUN npm run transpile

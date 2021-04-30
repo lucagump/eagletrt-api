@@ -10,7 +10,9 @@
     "cz-conventional-changelog": "^3.3.0"
   },
   "scripts": {
-    "start": "docker-compose up --build"
+    "start:production": "MODE=production docker-compose up --build",
+    "start:development": "MODE=development docker-compose up --build",
+    "start": "npm run start:development"
   },
   "repository": {
     "type": "git",
